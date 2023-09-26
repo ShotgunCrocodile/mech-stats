@@ -7,13 +7,13 @@
 	<template #default>
 	    <div class-="root-container">
 		<div class="header">
-		    <h1><a href="/">Overlord.gg</a></h1>
+		    <h1><a href="/">Mech Overlord</a></h1>
 		</div>
 		<div class="main">
 		    <component :is="Component" :key="$route.path"></component>
 		</div>
 		<div class="footer">
-		    <div>&copy; 2023 Overlord.gg</div>
+		    <div>&copy; 2023 mech-overlord.com</div>
 		    <div>
 			<a href="/links">related links</a>
 		    </div>
