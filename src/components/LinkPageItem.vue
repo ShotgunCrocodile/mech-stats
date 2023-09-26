@@ -7,11 +7,11 @@
 <template>
     <div class="item">
 	<h2>
-	    <a v-bind:href="props.url">
+	    <a v-bind:href="props.url" class="link">
 		<slot name="link"></slot>
 	    </a>
 	</h2>
-	<div>
+	<div class="text">
 	    <slot name="text"></slot>
 	</div>
     </div>
@@ -22,5 +22,9 @@
  .item {
      background-color: var(--color-background-soft);
      padding: 1em;
+ }
+
+ .link {
+     color: var(--color-heading);
  }
 </style>
