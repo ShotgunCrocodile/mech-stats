@@ -12,22 +12,24 @@ interface Transaction {
     price: string;
 }
 
-function transactionAppliesToTurn(param: {
+function transactionAppliesToTurn(params: {
     transaction: Transaction,
     turnAdded: number,
     currentTurn: number,
 }): boolean {
-    if (param.transaction.turn === "*") return true;
-    if (param.transaction.turn === param.currentTurn.toString()) return true;
+    if (params.transaction.turn === "*") return true;
+    if (params.transaction.turn === params.currentTurn.toString()) return true;
 
-    return appliesToTurn(
-        param.transaction.turn,
-        param.turnAdded,
-        param.currentTurn,
+    let result = appliesToTurn(
+        params.transaction.turn,
+        params.turnAdded,
+        params.currentTurn,
     );
+    return result;
 }
 
-function appliesToTurn(expr: string, turnAdded: number, currentTurn: number) {
+function appliesToTurn(expr: string, turnAdded: number, currentTurn: number): boolean {
+    if (expr.indexOf('n') === -1) return false;
     expr = expr.replace("n", turnAdded.toString());
     expr = currentTurn.toString() + expr;
     return Function(`return (${expr})`)();
