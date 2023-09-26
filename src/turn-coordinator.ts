@@ -150,13 +150,14 @@ export class MechabellumTurnInterface {
     }
 
     snapshot(): Object {
-        return deepCopy({
+        return deepCopy(Object.entries({
             turnNumber: this.turnNumber,
             reinforcement: this.reinforcement.value,
             towerButtons: Object.entries(this.towerButtons.value)
                 .filter(([_, value]) => value)
                 .map(([key, _]) => key),
             unitUnlock: this.unitUnlock.value,
+            startingUnits: this.startingUnits.value ? this.startingUnits.value : null,
             mechSlots: this.mechSlots.value,
             recoveredUnit: this.recoveredUnit.value,
             levelUps: Array.from(this.levelUps.value),
@@ -164,7 +165,7 @@ export class MechabellumTurnInterface {
                 .entries(this.devices)
                 .map(([key, value]) => [key, value.value])
                 .filter(([_, value]) => value > 0)),
-        })
+        }).reduce((a: any, [k, v]) => (v == null ? a : (a[k] = v, a)), {}));
     }
 }
 
@@ -689,6 +690,25 @@ export class TechState {
     snapshot(): TechSnapshot {
         return deepCopy(this.techs);
     }
+
+    sparseSnapshot(): TechSnapshot {
+        return Object.fromEntries(
+            Object
+                .entries(this.techs)
+                .map(([mechName, techMap]: [MechName, TechMap]) => {
+                    return [
+                        mechName,
+                        Object.fromEntries(
+                            Object.entries(techMap)
+                                .filter(([_, techInfo]) => {
+                                    return techInfo.boughtOn !== TechInfo.defaultBoughtTurn;
+                                })
+                        )
+                    ];
+                })
+                .filter(([_, techMap]) => Object.keys(techMap).length > 0)
+        )
+    }
 }
 
 export class TurnCoordinator {
@@ -775,7 +795,24 @@ export class TurnCoordinator {
             eventHandler.nextTurnBegin(state);
         }
 
-        this.updateExportString(encode(JSON.stringify(turnSnapshots)));
+        this.updateExportString(this.generateExportString(turnSnapshots))
+    }
+
+    setTechs(techs: FullTechMap) {
+        console.log("loading", techs);
+        Object.entries(techs).forEach(([mechName, techTree]) => {
+            Object.entries(techTree).forEach(([techName, techInfo]) => {
+                this.techs.techs[mechName][techName] = techInfo;
+            })
+        });
+    }
+
+    generateExportString(turnSnapshots: Object[]): string {
+        const saveState = {
+            techs: this.techs.sparseSnapshot(),
+            turns: turnSnapshots,
+        };
+        return encode(JSON.stringify(saveState));
     }
 
     transactionsForDevices(turn: MechabellumTurnInterface): Transaction[] {

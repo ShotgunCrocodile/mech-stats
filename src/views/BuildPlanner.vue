@@ -26,7 +26,7 @@
  };
  const loadTurn = (turn: MechabellumTurnInterface): void => {
      if (!buildToLoad) return;
-     const loadingTurn = buildToLoad[turn.turnNumber - 1];
+     const loadingTurn = buildToLoad.turns[turn.turnNumber - 1];
      if (!loadingTurn) return;
 
      console.log(loadingTurn);
@@ -41,6 +41,12 @@
      turn.recoveredUnit.value = loadingTurn.recoveredUnit;
      turn.levelUps.value = new Set<number>(loadingTurn.levelUps);
      Object.entries(loadingTurn.devices).forEach(([key, value]) => turn.devices[key].value = value);
+     console.log(turn.techs);
+     coordinator.setTechs(buildToLoad.techs);
+     if (loadingTurn.startingUnits !== undefined) {
+	 turn.startingUnits.value = loadingTurn.startingUnits;
+     }
+
  };
 
  const coordinator = new TurnCoordinator({dataDir: dataDir, updateExportString: updateExportString, loadTurn: loadTurn});
@@ -57,7 +63,7 @@
 
  onMounted(() => {
      if (!buildToLoad) return;
-     for (const _ of buildToLoad) {
+     for (const _ of buildToLoad.turns) {
 	 add();
      }
  });
