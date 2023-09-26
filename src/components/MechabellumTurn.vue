@@ -199,9 +199,6 @@
 		    label="name"
 		    v-model="selectedReinforcement"
 		/>
-		<!-- <select v-model="selectedReinforcement" @change="change">
-		     <option v-for="r in reinforcments" v-bind:key="r.name">{{ r.name }}</option>
-		     </select> -->
 	    </div>
 
 	    <div class="turn-choice" v-if="isStartingTurn()">
@@ -209,12 +206,9 @@
 
 		<v-select
 		    @option:selected="change"
-		    :options="starters.map((starter) => starter.name)"
+		    :options="starters.map((starter) => starter.name).sort()"
 		    v-model="selectedReinforcement"
 		/>
-		<!-- <select v-model="selectedReinforcement" @change="change">
-		     <option v-for="s in starters" v-bind:key="s.name">{{ s.name }}</option>
-		     </select> -->
 	    </div>
 
 	    <div class="turn-choice" v-if="isStartingTurn()">
@@ -222,12 +216,9 @@
 
 		<v-select
 		    @option:selected="change"
-		    :options="startUnits.map((units) => units.join(' / '))"
+		    :options="startUnits.map((units) => units.join(' / ')).sort()"
 		    v-model="selectedStartUnits"
 		/>
-		<!-- <select v-model="selectedStartUnits" @change="change">
-		     <option v-for="s in startUnits" v-bind:key="s">{{ s.join(" / ") }}</option>
-		     </select> -->
 	    </div>
 
 	    <div class="turn-choice">
@@ -238,9 +229,6 @@
 		    :options="army.lockedUnits"
 		    v-model="selectedUnlockableUnit"
 		/>
-		<!-- <select v-model="selectedUnlockableUnit" @change="change">
-		     <option v-for="u in army.lockedUnits" v-bind:key="`unlock-${u}`">{{ u }}</option>
-		     </select> -->
 	    </div>
 
 	    <div class="turn-choice" v-for="(n, index) in mechSlots" v-bind:key="n">
@@ -251,9 +239,6 @@
 		    :options="army.unlockedUnits"
 		    v-model="mechSlots[index]"
 		/>
-		<!-- <select v-model="mechSlots[index]" @change="change">
-		     <option v-for="u in army.unlockedUnits" v-bind:key="`slot-${index + 1}-${u}`">{{ u }}</option>
-		     </select> -->
 	    </div>
 
 	    <div class="command-center-bar">
@@ -329,12 +314,9 @@
 		    <div>Tech</div>
 		    <v-select
 			@option:selected="change"
-			:options="Object.keys(techs)"
+			:options="Object.keys(techs).sort()"
 			v-model="selectedTechUnit"
 		    />
-		    <!-- <select v-model="selectedTechUnit">
-			 <option v-for="t in Object.keys(techs)" v-bind:key="`tech for ${t}`">{{ t }}</option>
-			 </select> -->
 		</div>
 
 		<div
