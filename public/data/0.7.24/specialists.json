@@ -1,0 +1,341 @@
+{
+    "Aerial Specialist": {
+	"name": "Aerial Specialist",
+
+	"tags": ["Air", "Starter"],
+
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "10"
+	    },
+	    {
+		"property": "unlock",
+		"operation": "set",
+		"value": "0"
+
+	    }
+	]
+    },
+    "Marksman Specialist": {
+	"name": "Marksman Specialist",
+	"tags": ["Starter"],
+	"hooks": [
+	    {
+		"turn": "1",
+		"name": "preArmySnapshot",
+		"operation": "unlock",
+		"value": "MARKSMAN"
+	    },
+	    {
+		"turn": "1",
+		"name": "preRecruit",
+		"operation": "recruitUnit",
+		"value": "MARKSMAN(3)"
+	    }
+	]
+    },
+    "Elite Specialist": {
+	"name": "Elite Specialist",
+	"tags": ["Starter"],
+	"transactions": [
+	    {
+		"turn": "1",
+		"name": "Elite Grant",
+		"price": "-50"
+	    }
+	],
+	"hooks": [
+	    {
+		"name": "preRecruit",
+		"operation": "setMinLevel",
+		"value": {
+		    "name": "*",
+		    "level": 2
+		},
+		"persist": true
+	    }
+	]
+    },
+    "Rhino Specialist": {
+	"name": "Rhino Specialist",
+	"tags": ["Starter"],
+	"hooks": [
+	    {
+		"turn": "3",
+		"name": "preArmySnapshot",
+		"operation": "unlock",
+		"value": "RHINO"
+	    },
+	    {
+		"turn": "3",
+		"name": "preRecruit",
+		"operation": "recruitUnit",
+		"value": "RHINO(2)"
+	    }
+	]
+    },
+    "Quick Supply Specialist": {
+	"name": "Quick Supply Specialist",
+	"tags": ["Starter"],
+	"effects": [
+	],
+	"transactions": [
+	    {
+		"turn": "1",
+		"name": "Quick Supply Grant",
+		"price": "-200"
+	    }
+	]
+    },
+
+    "Junior Manufacturing Specialist": {
+	"name": "Junior Manufacturing Specialist",
+	"price": "150",
+	"tags": [
+	    "Reinforcement",
+	    "Normal"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-50"
+	    }
+	]
+    },
+    "Senior Manufacturing Specialist": {
+	"name": "Senior Manufacturing Specialist",
+	"price": "50",
+	"tags": [
+	    "Reinforcement",
+	    "Giant"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-50"
+	    }
+	]
+    },
+    "Senior Attack Specialist": {
+	"name": "Senior Attack Specialist",
+	"price": "250",
+	"tags": ["Mech"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "0.3"
+	    }
+	]
+    },
+    "Top Supply Specialist": {
+	"name": "Top Supply Specialist",
+	"price": "250",
+	"tags": ["Reinforcement"],
+	"transactions": [
+	    {
+		"turn": ">n",
+		"name": "Top Supply Grant",
+		"price": "-150"
+	    }
+	]
+    },
+    "Senior Defense Specialist": {
+	"name": "Senior Defense Specialist",
+	"price": "250",
+	"tags": ["Mech"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.3"
+	    }
+	]
+    },
+    "Ranged Specialist": {
+	"name": "Ranged Specialist",
+	"price": "300",
+	"tags": ["Ranged"],
+
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "12"
+	    }
+	]
+    },
+
+    "Heavy Armor Specialist": {
+	"name": "Heavy Armor Specialist",
+
+	"tags": ["Mech", "Starter"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.17"
+	    }
+	]
+
+    },
+    "Cost Control Specialist": {
+	"name": "Cost Control Specialist",
+
+	"tags": ["Mech", "Starter"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "-0.13"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-0.13"
+	    }
+	],
+	"transactions": [
+	    {
+		"turn": "*",
+		"name": "Cost Control Specialist Grant",
+		"price": "-100"
+	    }
+	]
+    },
+    "Supply Specialist": {
+	"name": "Supply Specialist",
+	"price": "50",
+
+	"tags": ["Reinforcement", "Starter"],
+
+	"effects": [{
+	    "property": "supply",
+	    "operation": "add",
+	    "value": "50"
+	}],
+	"transactions": [
+	    {
+		"turn": "*",
+		"name": "Supply Specialist Grant",
+		"price": "-50"
+	    }
+	]
+    },
+
+    "Speed Specialist": {
+	"name": "Speed Specialist",
+	"price": "100",
+	"tags": ["Mech", "Starter"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+
+	    }
+	]
+    },
+
+    "Giant Specialist": {
+	"name": "Giant Specialist",
+
+	"tags": ["Giant", "Starter"],
+
+	"effects": [
+	    {
+		"property": "unlock",
+		"operation": "set",
+		"value": "0"
+	    }
+	]
+    },
+
+    "Giant Hunter": {
+	"name": "Giant Hunter",
+	"price": "100",
+	"tags": ["Reinforcement"]
+    },
+
+    "Skill Specialist": {
+	"name": "Skill Specialist",
+	"price": "100",
+	"tags": ["Reinforcement"]
+    },
+    "Elite Rhino": {
+	"name": "Elite Rhino",
+	"price": "50",
+	"tags": ["Reinforcement"]
+    },
+    "Elite Hacker": {
+	"name": "Elite Hacker",
+	"price": "50",
+	"tags": ["Reinforcement"]
+    },
+    "Elite Mustang": {
+	"name": "Elite Mustang",
+	"price": "50",
+	"tags": ["Reinforcement"]
+    },
+    "Elite Marksman Unit": {
+	"name": "Elite Marksman",
+	"price": "50",
+	"tags": ["Reinforcement"]
+    },
+    "Elite Wasp": {
+	"name": "Elite Wasp",
+	"price": "50",
+	"tags": ["Reinforcement"],
+	"hooks": [
+	    {
+		"name": "preRecruit",
+		"operation": "setMinLevel",
+		"value": {
+		    "name": "WASP",
+		    "level": 3
+		}
+	    }
+	]
+    },
+    "Missile Device Specialist": {
+	"name": "Missile Device Specialist",
+	"price": "0",
+	"tags": ["Reinforcement"]
+    },
+    "Shield Device Specialist": {
+	"name": "Shield Device Specialist",
+	"price": "0",
+	"tags": ["Reinforcement"]
+    },
+    "Deployment Specialist": {
+	"name": "Deployment Specialist",
+	"price": "50",
+	"tags": ["Reinforcement"],
+	"hooks": [
+	    {
+		"name": "preArmySnapshot",
+		"operation": "editBuildSlots",
+		"value": "+1"
+	    }
+	]
+    },
+    "Strike Specialist": {
+	"name": "Strike Specialist",
+	"price": "0",
+	"tags": ["Reinforcement"]
+    },
+    "Tech Specialist": {
+	"name": "Tech Specialist",
+	"price": "50",
+	"tags": ["Reinforcement"]
+    }
+}

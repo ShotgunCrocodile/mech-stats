@@ -1,0 +1,9 @@
+{
+    "Pass": {
+	"name": "Pass",
+	"price": "-50",
+	"tags": [
+	    "Reinforcement"
+	]
+    }
+}

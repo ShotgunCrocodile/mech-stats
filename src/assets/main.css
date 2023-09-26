@@ -1,0 +1,56 @@
+@import './base.css';
+@import "vue-select/dist/vue-select.css";
+
+#app {
+    max-width: 1280px;
+    margin: 0 auto;
+
+    font-weight: normal;
+}
+
+
+.clickable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.button {
+    background-color: var(--vt-c-green-dark);
+    border: none;
+    color: var(--vt-c-text);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 120%;
+}
+
+.small-button {
+    background-color: var(--vt-c-green-dark);
+    border: none;
+    color: var(--vt-c-text);
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 120%;
+}
+
+.resizable-button {
+    background-color: var(--vt-c-green-dark);
+    border: none;
+    color: var(--vt-c-text);
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 120%;
+
+}
+
+ a {
+     color: inherit;
+     text-decoration: underline;
+ }
