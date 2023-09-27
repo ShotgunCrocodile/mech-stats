@@ -21,7 +21,7 @@
 
  let exportData = ref("");
  const updateExportString = (newExportData: string) => {
-     exportData.value = `${location.host}${route.path}?build=${newExportData}`
+     exportData.value = `${location.protocol}//${location.host}${route.path}?build=${newExportData}`
 
  };
  const loadTurn = (turn: MechabellumTurnInterface): void => {
@@ -106,7 +106,7 @@
 
  .copy {
      display: grid;
-     grid-template-rows: 1fr;
+     grid-template-rows: auto auto 1fr;
      grid-template-columns: 1fr;
      grid-row-gap: 0.5em;
      background-color: var(--color-background-soft);
@@ -119,7 +119,8 @@
      border-top: 1px solid var(--color-border);
      padding: 1em;
      display: grid;
-     grid-auto-rows: 1fr;
+     grid-auto-rows: auto;
+     grid-row-gap: 1em;
  }
 
 </style>
