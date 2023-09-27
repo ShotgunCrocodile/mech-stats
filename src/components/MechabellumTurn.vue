@@ -121,7 +121,6 @@
 
 
  function change() {
-     console.log(selectedReinforcement.value);
      props.coordinator.generateTurns();
  }
 
@@ -155,7 +154,6 @@
      }));
      change();
  });
-
 </script>
 
 
@@ -195,6 +193,7 @@
 
 		<v-select
 		    @option:selected="change"
+		    :clearable="false"
 		    :options="reinforcements.map((r) => r.name)"
 		    label="name"
 		    v-model="selectedReinforcement"
@@ -206,6 +205,7 @@
 
 		<v-select
 		    @option:selected="change"
+		    :clearable="false"
 		    :options="starters.map((starter) => starter.name).sort()"
 		    v-model="selectedReinforcement"
 		/>
@@ -216,6 +216,7 @@
 
 		<v-select
 		    @option:selected="change"
+		    :clearable="false"
 		    :options="startUnits.map((units) => units.join(' / ')).sort()"
 		    v-model="selectedStartUnits"
 		/>
@@ -225,9 +226,8 @@
 		<div>Unit Unlock:</div>
 
 		<v-select
-		    @option:selected="change"
 		    :options="army.lockedUnits"
-		    v-model="selectedUnlockableUnit"
+		    @update:modelValue="(v) => { selectedUnlockableUnit = v === null ? '' : v ; change(); }"
 		/>
 	    </div>
 
@@ -235,9 +235,9 @@
 		<div>Purchase Mech {{ index + 1}}:</div>
 
 		<v-select
-		    @option:selected="change"
 		    :options="army.unlockedUnits"
 		    v-model="mechSlots[index]"
+		    @update:modelValue="(v) => { mechSlots[index] = v === null ? '' : v ; change(); }"
 		/>
 	    </div>
 
