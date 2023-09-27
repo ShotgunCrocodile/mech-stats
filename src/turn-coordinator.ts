@@ -422,13 +422,15 @@ export class ArmySnapshot {
         lockedUnits?: string[],
         unlockedUnits?: string[],
         deploymentOpportunities?: number;
+        recoveredUnit?: string,
     }) {
         params = params || {};
         this.units = params.units || [];
         this.buildSlots = params.buildSlots || 2;
         this.lockedUnits = params.lockedUnits || [];
         this.unlockedUnits = params.unlockedUnits || [];
-        this.valueOnBoard = this.units.reduce((acc, unit) => acc + unit.value, 0);
+        this.valueOnBoard = this.units
+            .reduce((acc, unit) => acc + (unit.ident !== params?.recoveredUnit ? unit.value : 0), 0);
         this.deploymentOpportunities = params.deploymentOpportunities || 0;
     }
 }
@@ -440,14 +442,14 @@ export class Unit {
     turnPurchased: number;
     levelMod: ModData;
     level: number;
-    ident: number;
+    ident: string;
     value: number;
 
     constructor(params: {
         model: MechData,
         turnPurchased: number,
         level: number,
-        ident: number;
+        ident: string;
     }) {
         this.baseModel = params.model;
         this.turnPurchased = params.turnPurchased;
@@ -506,33 +508,34 @@ class Army {
     dataDir: DataDir;
     unlockedUnits: string[];
     buildSlots: number;
-    units: Unit[];
+    units: { [k: string]: Unit };
     minimumLevel: { [k: string]: number };
-    identGenerator: Generator<number, void, unknown>;
+    identGenerator: Generator<number>;
     deploymentOpportunities: number;
 
     constructor(params: { dataDir: DataDir }) {
         this.dataDir = params.dataDir;
         this.unlockedUnits = [];
         this.buildSlots = 2;
-        this.units = [];
+        this.units = {};
         this.minimumLevel = {};
-        this.identGenerator = numberSequence(1);
+        this.identGenerator = numberSequence(0);
         this.deploymentOpportunities = 5;
     }
 
-    snapshot(unlockSlot: string): ArmySnapshot {
+    snapshot(unlockSlot: string, recoveredUnit: string): ArmySnapshot {
         const [unlockedUnits, lockedUnits] = partition(
             this.dataDir.mechNames(),
             (v) => this.unlockedUnits.includes(v)
         );
 
         return new ArmySnapshot({
-            units: this.units.map((unit) => deepCopy(unit)),
+            units: Object.values(this.units).map((unit) => deepCopy(unit)),
             buildSlots: this.buildSlots,
             lockedUnits: lockedUnits.concat(unlockSlot).sort(),
             unlockedUnits: unlockedUnits.concat("").sort(),
             deploymentOpportunities: this.deploymentOpportunities,
+            recoveredUnit: recoveredUnit,
         });
     }
 
@@ -556,7 +559,7 @@ class Army {
 
     applyLevelUps(turn: MechabellumTurnInterface) {
         Array.from(turn.levelUps.value)
-            .map((ident: number) => this.units.filter((unit: Unit) => unit.ident === ident))
+            .map((ident: number) => this.units[ident])
             .flat()
             .filter(isDefined)
             .forEach((unit: Unit) => unit.levelUp())
@@ -568,7 +571,8 @@ class Army {
             .filter((part) => part.length > 0);
     }
 
-    addUnitUnlocks(units: string) {
+    addUnitUnlocks(units: string | null) {
+        if (units === null) return;
         this
             .unitNames(units)
             .forEach((name) => this.unlockUnit(name));
@@ -598,13 +602,13 @@ class Army {
         // result: ["MARKSMAN(3)", "MARKSMAN", "(3)", "3"]
         // We want element 1 and 3 for the name and level.
         // If level is not present we default to 1.
-        const result = shorthand.match(/([A-Z]+)(\((\d)\))?/);
+        const result = shorthand.match(/([A-Z ]+)(\((\d)\))?/);
         if (result === null) return undefined;
 
         return { name: result[1], level: parseInt(result[3]) || this.minimumLevelFor(result[1]) };
     }
 
-    addPurchasedUnits(slots: string[], turn: number): number[] {
+    addPurchasedUnits(slots: string[], turn: number): string[] {
         return slots
             .map((slot: string) => this.parseUnitShorthand(slot))
             .filter(isDefined)
@@ -619,19 +623,25 @@ class Army {
             })
     }
 
-    addUnits(unit: MechData, count: number, turn: number, level: number): number[] {
-        return Array(count).fill('').map(() => this.addUnit(unit, turn, level));
+    addUnits(mech: MechData, count: number, turn: number, level: number): string[] {
+        return Array(count).fill('').map(() => this.addUnit(mech, turn, level));
     }
 
-    addUnit(data: MechData, turn: number, level: number): number {
+    addUnit(data: MechData, turn: number, level: number): string {
+        const ident = this.identGenerator.next().value!.toString();
         const unit = new Unit({
             model: data,
             turnPurchased: turn,
             level: level,
-            ident: this.units.length,
+            ident: ident,
         });
-        this.units.push(unit);
+        this.units[ident] = unit;
         return unit.ident;
+    }
+
+    removeUnit(ident: number | string) {
+        if (typeof ident === "string") ident = parseInt(ident);
+        delete this.units[ident];
     }
 }
 
@@ -748,7 +758,6 @@ export class TurnCoordinator {
             state.reinforcement = turn.reinforcement.value.slice();
 
             this.ensureTowerButtonsSelected(mods, state, turn);
-            state.mechSlots = deepCopy(turn.mechSlots.value);
             state.recoveredUnit = turn.recoveredUnit.value;
 
             mods.addModsFromTurn(turn);
@@ -764,13 +773,14 @@ export class TurnCoordinator {
             eventHandler.preArmySnapshot(state);
             army.addUnitUnlocks(turn.unitUnlock.value);
             army.addUnitUnlocks(turn.startingUnits.value);
+            state.mechSlots = this.copyMechSlots(turn, army);
 
             eventHandler.preRecruit(state);
             army.addStartingUnits(turn.startingUnits.value);
             const newUnitIdents = army.addPurchasedUnits(state.mechSlots, turnNumber);
             army.applyLevelUps(turn);
             army.incrementOpportunities(turn);
-            state.army = army.snapshot(turn.unitUnlock.value);
+            state.army = army.snapshot(turn.unitUnlock.value, state.recoveredUnit);
 
             state.transactions = Array()
                 .concat([turnGrantTransaction(turnNumber)])
@@ -783,6 +793,7 @@ export class TurnCoordinator {
                 .concat(this.transactionsForUnitRecovery(state, turnNumber, mods, army))
                 .concat(this.transactionsForUnitTech(turn.turnNumber));
             state.tallyTransactions();
+            army.removeUnit(state.recoveredUnit);
 
             mods.applyModsToTurnState(state);
             this.ensureCorrectMechSlotsCount(state, army);
@@ -798,8 +809,11 @@ export class TurnCoordinator {
         this.updateExportString(this.generateExportString(turnSnapshots))
     }
 
+    copyMechSlots(turn: MechabellumTurnInterface, army: Army): string[] {
+        return turn.mechSlots.value.map((value) => army.unlockedUnits.includes(value) ? value : "");
+    }
+
     setTechs(techs: FullTechMap) {
-        console.log("loading", techs);
         Object.entries(techs).forEach(([mechName, techTree]) => {
             Object.entries(techTree).forEach(([techName, techInfo]) => {
                 this.techs.techs[mechName][techName] = techInfo;
@@ -875,8 +889,8 @@ export class TurnCoordinator {
     }
 
     transactionsForUnitUnlock(unlock: string, turn: number, mods: ModTracker): Transaction[] {
-        if (unlock === "") return [];
-        let mech = this.dataDir.mechForName(unlock)!;
+        let mech = this.dataDir.mechForName(unlock);
+        if (!isDefined(mech)) return [];
         let activeMods = mods
             .modsAffectingTurn(turn)
             .filter((mod) => modAppliesToMech(mod, mech));
@@ -891,7 +905,7 @@ export class TurnCoordinator {
     transactionsForUnitPurchases(
         turnNumber: number,
         mods: ModTracker,
-        idents: number[],
+        idents: string[],
         army: Army,
     ): Transaction[] {
         const activeMods = mods.modsAffectingTurn(turnNumber);

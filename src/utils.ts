@@ -25,7 +25,7 @@ export function partition<T>(collection: T[], predicate: (value: T) => boolean):
         }, [[], []]);
 }
 
-export function* numberSequence(start: number) {
+export function* numberSequence(start: number): Generator<number> {
     while (true) {
         yield start;
         start++;
