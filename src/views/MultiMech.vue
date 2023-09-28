@@ -1,9 +1,10 @@
 <script setup lang="ts">
  import { ref } from 'vue';
  import { loadDataDir } from '../data-loader';
+ import { CURRENT_VERSION } from '../consts';
  import MechDetails from './MechDetails.vue';
 
- const dataDir = await loadDataDir("0.7.24");
+ const dataDir = await loadDataDir(CURRENT_VERSION);
 
  const selectedMechName = ref('ARCLIGHT');
  const mechs = ref([]);

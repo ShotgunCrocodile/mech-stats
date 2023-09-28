@@ -1,3 +1,4 @@
+import { CURRENT_VERSION } from './consts';
 import type { Ref } from 'vue';
 import type { DataDir } from './data-loader';
 import { modAppliesToMech } from './data-loader';
@@ -829,6 +830,7 @@ export class TurnCoordinator {
 
     generateExportString(turnSnapshots: Object[]): string {
         const saveState = {
+            version: CURRENT_VERSION,
             techs: this.techs.sparseSnapshot(),
             turns: turnSnapshots,
         };

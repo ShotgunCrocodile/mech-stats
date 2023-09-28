@@ -1,0 +1,90 @@
+{
+    "Redeployment": {
+	"name": "Redeployment",
+	"price": "50"
+    },
+    "Photon Emision": {
+	"name": "Photon Emision",
+	"price": "50"
+    },
+    "Mobilize Battleship":{
+	"name": "Mobilize Battleship",
+	"price": "200"
+    },
+    "Mobile Beacon": {
+	"name": "Mobile Beacon",
+	"price": "100"
+    },
+    "Orbital Javelin": {
+	"name": "Orbital Javelin",
+	"price": "200"
+    },
+    "Acid Blast": {
+	"name": "Acid Blast",
+	"price": "250"
+    },
+    "Vulcan's Descent": {
+	"name": "Vulcan's Descent",
+	"price": "200"
+    },
+    "Parasitic Ammo": {
+	"name": "Parasitic Ammo",
+	"price": "400"
+    },
+    "Orbital Bombardment": {
+	"name": "Orbital Bombardment",
+	"price": "100"
+    },
+    "Rhino Assault": {
+	"name": "Rhino Assault",
+	"price": "50"
+    },
+    "Incendiary Bomb": {
+	"name": "Incendiary Bomb",
+	"price": "100"
+    },
+    "Shield Airdrom": {
+	"name": "Shield Airdrom",
+	"price": "50"
+    },
+    "Electromagnetic Impact": {
+	"name": "Electromagnetic Impact",
+	"price": "50"
+    },
+    "Electromagnetic Blast": {
+	"name": "Electromagnetic Blast",
+	"price": "200"
+    },
+    "Underground Threat": {
+	"name": "Underground Threat",
+	"price": "50"
+    },
+    "Intensive Training": {
+	"name": "Intensive Training",
+	"price": "50"
+    },
+    "Smoke Bomb": {
+	"name": "Smoke Bomb",
+	"price": "100"
+    },
+    "Missile Strike": {
+	"name": "Missile Strike",
+	"price": "0"
+    },
+    "Ion Blast": {
+	"name": "Ion Blast",
+	"price": "200"
+    },
+    "Wasp Swarm": {
+	"name": "Wasp Swarm",
+	"price": "50"
+    },
+    "Lightning Storm": {
+	"name": "Lightning Storm",
+	"price": "350"
+    },
+    "Nuke": {
+	"name": "Nuke",
+	"price": "350"
+    }
+}

@@ -6,16 +6,17 @@
  import { TurnCoordinator, MechabellumTurnInterface } from '../turn-coordinator';
  import { useRoute } from 'vue-router';
  import { decode, sleep } from '../utils';
+ import { CURRENT_VERSION } from '../consts';
 
  const route = useRoute();
 
  let turns = ref([]);
- const dataDir = await loadDataDir("0.7.24");
+ const dataDir = await loadDataDir(CURRENT_VERSION);
  const buildToLoad = (() => {
      const build = route.query.build;
      if (!build) return;
      const value = JSON.parse(decode(route.query.build));
-     console.log(JSON.stringify(value, null, 4));
+     console.log("loading", JSON.stringify(value, null, 4));
      return value;
  })();
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
  import { ref } from 'vue';
  import { useRouter } from 'vue-router';
+ import { CURRENT_VERSION } from '../consts';
  import { loadDataDir, DataDir } from '../data-loader';
  import { modifyMech, describeMod } from '../mech-updater';
  import { ModData } from '../data-types';
@@ -13,8 +14,7 @@
  const route = useRouter().currentRoute.value;
  const mechName = props.mechName;;
 
-
- const dataDir: DataDir = await loadDataDir("0.7.24");
+ const dataDir: DataDir = await loadDataDir(CURRENT_VERSION);
  const levelModTemplate = dataDir.modData['LevelTemplate'];
  let mechLevel = 1;
 
@@ -22,9 +22,9 @@
  const mechData = ref(dataDir.mechData[mechName]);
  const mods: ModData[] = dataDir.modsForTags(dataDir.mechTags(mechName));
 
- let activeModifiers = new Set<string>();
- const dps = calculateMechDPS(mechData.value);
-const survivals = calculateSurvival(mechData.value);
+ let activeModifiers = ref([]);
+ let dps = calculateMechDPS(mechData.value);
+ let survivals = calculateSurvival(mechData.value);
 
  function mounted() {
      update();
@@ -34,43 +34,30 @@ const survivals = calculateSurvival(mechData.value);
      return Math.min(Math.max(value, min), max);
  }
 
-
  function click(arg: any) {
      arg.target.classList.toggle("pressed");
      updateLevelMod();
      toggleModifier(arg.target.innerText);
  }
 
-
  function level(change: number){
      mechLevel = clamp(mechLevel + change, 1, 9);
      update();
  }
 
-
- function toggleModifier(name: string): void {
-     if (activeModifiers.has(name)) {
-	 activeModifiers.delete(name);
-     } else {
-	 activeModifiers.add(name);
-     }
-     updateMechData();
- }
-
-
  function update() {
      updateMechData();
      updateLevelMod();
+     dps = calculateMechDPS(mechData.value);
+     survivals = calculateSurvival(mechData.value);
  }
-
 
  function updateMechData() {
      const modifiers: ModData[] = Object.values(mods)
-			     .filter((mod: any) => activeModifiers.has(mod.name));
+			     .filter((mod: any) => activeModifiers.value.includes(mod.name));
      modifiers.push(levelModTemplate);
      mechData.value = modifyMech(baseMechData, modifiers);
  }
-
 
  function updateLevelMod() {
      levelModTemplate.effects = [
@@ -91,22 +78,31 @@ const survivals = calculateSurvival(mechData.value);
 	 }
      ];
  }
-
-
 </script>
+
 <template>
     <div class="container">
 	<h1 class="mech-name underlined">{{ mechName }}</h1>
+
 	<div class="level-selector">
 	    <span class="clickable" @click="level(-1)">&#8592;</span>
 	    Level: {{ mechData.level }}
 	    <span class="clickable" @click="level(1)">&#8594;</span>
 	</div>
-	<div></div>
 
-	<div class="modifier-list">
-	    <div :title="describeMod(mod)" class="button clickable" v-for="mod in mods" @click="click" >{{ mod.name }}</div>
+	<div/>
+
+	<div>
+	    <v-select
+		v-model="activeModifiers"
+		:options="mods.map((m) => m.name).filter((mod) => !activeModifiers.includes(mod))"
+		:closeOnSelect="false"
+		@option:selected="update"
+		@option:deselected="update"
+		multiple
+	    />
 	</div>
+
 	<div class="stat-block-group">
 	    <div class="stat-block">
 		<div>Cost</div>
@@ -189,8 +185,8 @@ const survivals = calculateSurvival(mechData.value);
 <style scoped>
  .container {
      display: grid;
-     grid-template-columns: minmax(1em, auto) minmax(1em, auto) minmax(1em, auto);
-     grid-template-rows: minmax(1em, auto) minmax(auto, 500px);
+     grid-template-columns: 1fr 1fr 1fr;
+     grid-template-rows: auto 1fr;
      grid-column-gap: 4em;
  }
 
@@ -216,7 +212,6 @@ const survivals = calculateSurvival(mechData.value);
  .modifier-list {
      display: grid;
      grid-template-columns: auto;
-     overflow-y: auto;
      justify-content: left;
  }
  .modifier-list .button {
@@ -240,6 +235,25 @@ const survivals = calculateSurvival(mechData.value);
 
  .level-selector {
      text-align: center;
+ }
+
+ >>> {
+     --vs-controls-color: var(--color-text);
+     --vs-border-color: var(--color-border);
+
+     --vs-dropdown-bg: var(--color-background-soft);
+     --vs-dropdown-color: var(--color-text);
+     --vs-dropdown-option-color: var(--color-text);
+
+     --vs-selected-bg: var(--color-background-mute);
+     --vs-selected-color: var(--color-text);
+
+     --vs-search-input-color: var(--color-text);
+
+     --vs-dropdown-option--active-bg: var(--color-background-mute);
+     --vs-dropdown-option--active-color: var(--color-heading);
+
+     --vs-dropdown-min-width: 250px;
  }
 
 </style>

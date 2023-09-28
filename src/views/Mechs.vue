@@ -1,6 +1,7 @@
 <script setup>
+ import { CURRENT_VERSION } from '../consts';
  import { loadDataDir } from '../data-loader';
- const dataDir = await loadDataDir("0.7.24");
+ const dataDir = await loadDataDir(CURRENT_VERSION);
 </script>
 
 <template>

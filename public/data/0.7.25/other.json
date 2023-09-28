@@ -1,0 +1,99 @@
+{
+    "Rapid Resupply": {
+	"name": "Rapid Resupply",
+	"price": "-200",
+	"hooks": [
+	    {
+		"name": "nextTurnBegin",
+		"operation": "addMod",
+		"value": "Rapid Resupply Debt"
+	    },
+	    {
+		"name": "turnEnd",
+		"operation": "removeMod",
+		"value": "Rapid Resupply"
+	    }
+	]
+    },
+    "Rapid Resupply Debt": {
+	"name": "Rapid Resupply Debt",
+	"price": "300",
+	"hooks": [
+	    {
+		"name": "turnEnd",
+		"operation": "removeMod",
+		"value": "Rapid Resupply Debt"
+	    }
+	]
+    },
+    "Mass Recruitment": {
+	"name": "Mass Recruitment",
+	"price": "50",
+	"effects": [
+	    {
+		"target": "turn",
+		"property": "totalMechSlots",
+		"operation": "add",
+		"value": "1"
+	    }
+	],
+	"hooks": [
+	    {
+		"name": "turnEnd",
+		"operation": "removeMod",
+		"value": "Mass Recruitment"
+	    },
+	    {
+		"name": "preArmySnapshot",
+		"operation": "editBuildSlots",
+		"value": "+1"
+	    },
+	    {
+		"name": "nextTurnBegin",
+		"operation": "editBuildSlots",
+		"value": "-1"
+	    }
+	]
+
+    },
+    "Elite Recruitment": {
+	"name": "Elite Recruitment",
+	"price": "100",
+	"hooks": [
+	    {
+		"name": "turnEnd",
+		"operation": "removeMod",
+		"value": "Elite Recruitment"
+	    },
+	    {
+		"name": "preRecruit",
+		"operation": "setMinLevel",
+		"value": {
+		    "name": "*",
+		    "level": 2
+		}
+	    },
+	    {
+		"name": "nextTurnBegin",
+		"operation": "setMinLevel",
+		"value": {
+		    "name": "*",
+		    "level": 1,
+		    "overwrite": true
+		}
+	    }
+	]
+    },
+    "Field Recovery": {
+	"name": "Field Recovery",
+	"price": "100"
+    },
+    "Oil": {
+	"name": "Oil",
+	"price": "150"
+    },
+    "Mobile Beacon": {
+	"name": "Mobile Beacon",
+	"price": "100"
+    }
+}

@@ -34,7 +34,7 @@ export class DataDir {
         return [name].concat(mech.tags);
     }
 
-    modsForTags(tags: string[]): string[] {
+    modsForTags(tags: string[]): ModData[] {
         return Object.values(this.modData)
             .filter((mod) => {
                 if (mod.tags === undefined) return false;

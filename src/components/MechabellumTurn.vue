@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { CURRENT_VERSION } from '../consts.ts';
  import { ref, onMounted, watch } from 'vue';
  import { loadDataDir, DataDir } from '../data-loader';
  import type { ModData } from '../data-types';
@@ -39,12 +40,12 @@
      coordinator: TurnCoordinator,
  }>();
 
- const dataDir: DataDir = await loadDataDir("0.7.24");
+ const dataDir: DataDir = await loadDataDir(CURRENT_VERSION);
  const reinforcements = dataDir.modsForTags(["Reinforcement"]).sort(sortByKey("name"));
  const starters = dataDir.modsForTags(["Starter"]).sort(sortByKey("name"));
  const startUnits = dataDir.startData;
 
- const selectedReinforcement = (props.turnNumber === 1 ? ref('Aerial Specialist') : ref('Pass'));
+ const selectedReinforcement = (props.turnNumber === 1 ? ref('Aerial Specialist') : ref('Skip'));
  const selectedUnlockableUnit = ref("");
  const selectedStartUnits = ref("CRAWLER / SLEDGEHAMMER");
  const recoveredUnit = ref("");
@@ -132,6 +133,7 @@
      towerButtons.value = deepCopy(state.towerButtons);
      army.value = state.army;
      recoveredUnit.value = state.recoveredUnit;
+     selectedUnlockableUnit.value = state.unitUnlock;
  }
 
  function isStartingTurn() {
@@ -227,16 +229,19 @@
 
 		<v-select
 		    :options="army.lockedUnits"
+		    v-model="selectedUnlockableUnit"
+		    :closeOnSelect="true"
 		    @update:modelValue="(v) => { selectedUnlockableUnit = v === null ? '' : v ; change(); }"
 		/>
 	    </div>
 
-	    <div class="turn-choice" v-for="(n, index) in mechSlots" v-bind:key="n">
+	    <div class="turn-choice" v-for="(n, index) in mechSlots" v-bind:key="`${index}=${n}`">
 		<div>Purchase Mech {{ index + 1}}:</div>
 
 		<v-select
 		    :options="army.unlockedUnits"
 		    v-model="mechSlots[index]"
+		    :closeOnSelect="true"
 		    @update:modelValue="(v) => { mechSlots[index] = v === null ? '' : v ; change(); }"
 		/>
 	    </div>
@@ -354,7 +359,7 @@
 			<IconMech />
 		    </div>
 		    <div title="Deployment opportunity ratio">
-			<span title="Deployments used">{{ army.units?.length }}</span>
+			<span title="Deployments used">{{ army.unitCount }}</span>
 			/
 			<span title="Total deployment opportunities"> {{ army.deploymentOpportunities }}</span>
 		    </div>
