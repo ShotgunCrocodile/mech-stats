@@ -65,6 +65,7 @@ export class TurnState {
     army: ArmySnapshot;
     recoveredUnit: string;
     techs: TechSnapshot;
+    unitUnlock: string;
 
     constructor() {
         this.turn = 1;
@@ -78,6 +79,7 @@ export class TurnState {
         this.army = new ArmySnapshot();
         this.recoveredUnit = "";
         this.techs = {};
+        this.unitUnlock = "";
     }
 
     restoreDefaults() {
@@ -415,6 +417,7 @@ export class ArmySnapshot {
     unlockedUnits: string[];
     valueOnBoard: number;
     deploymentOpportunities: number;
+    unitCount: number;
 
     constructor(params?: {
         units?: Unit[],
@@ -432,6 +435,7 @@ export class ArmySnapshot {
         this.valueOnBoard = this.units
             .reduce((acc, unit) => acc + (unit.ident !== params?.recoveredUnit ? unit.value : 0), 0);
         this.deploymentOpportunities = params.deploymentOpportunities || 0;
+        this.unitCount = this.units.length - (params?.recoveredUnit !== "" ? 1 : 0);
     }
 }
 
@@ -756,6 +760,7 @@ export class TurnCoordinator {
             const turnNumber = index + 1;
             state.restoreDefaults()
             state.reinforcement = turn.reinforcement.value.slice();
+            state.unitUnlock = turn.unitUnlock.value;
 
             this.ensureTowerButtonsSelected(mods, state, turn);
             state.recoveredUnit = turn.recoveredUnit.value;
@@ -765,6 +770,7 @@ export class TurnCoordinator {
                 mods
                     .modsOnTurn(turnNumber)
                     .map((modWrapper) => modWrapper.data)
+                    .filter(isDefined)
                     .map((mod) => mod.hooks)
                     .filter(isDefined)
                     .flat()

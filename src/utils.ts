@@ -49,3 +49,6 @@ export function decode(encodedString: string): Object {
     console.log(decoded);
     return JSON.parse(decoded);
 }
+
+
+export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

@@ -5,7 +5,7 @@
  import MechabellumTurn from '../components/MechabellumTurn.vue';
  import { TurnCoordinator, MechabellumTurnInterface } from '../turn-coordinator';
  import { useRoute } from 'vue-router';
- import { decode } from '../utils';
+ import { decode, sleep } from '../utils';
 
  const route = useRoute();
 
@@ -29,19 +29,17 @@
      const loadingTurn = buildToLoad.turns[turn.turnNumber - 1];
      if (!loadingTurn) return;
 
-     console.log(loadingTurn);
+     console.log(turn.turnNumber, loadingTurn);
 
      turn.reinforcement.value = loadingTurn.reinforcement;
      Object.entries(turn.towerButtons.value).forEach(([key, value]) => {
 	 turn.towerButtons.value[key] = loadingTurn.towerButtons.includes(key);
      });
-     console.log(turn.towerButtons.value);
      turn.unitUnlock.value = loadingTurn.unitUnlock;
      turn.mechSlots.value = loadingTurn.mechSlots;
      turn.recoveredUnit.value = loadingTurn.recoveredUnit;
      turn.levelUps.value = new Set<number>(loadingTurn.levelUps);
      Object.entries(loadingTurn.devices).forEach(([key, value]) => turn.devices[key].value = value);
-     console.log(turn.techs);
      coordinator.setTechs(buildToLoad.techs);
      if (loadingTurn.startingUnits !== undefined) {
 	 turn.startingUnits.value = loadingTurn.startingUnits;
@@ -49,7 +47,6 @@
 
  };
 
- const coordinator = new TurnCoordinator({dataDir: dataDir, updateExportString: updateExportString, loadTurn: loadTurn});
 
  let showExport = ref(false);
  const toggleExport = () => {
@@ -61,12 +58,20 @@
      turns.value.push(0);
  }
 
- onMounted(() => {
+ onMounted(async () => {
      if (!buildToLoad) return;
      for (const _ of buildToLoad.turns) {
 	 add();
+	 // hack
+	 // The steps each load async and can possibly resolve out of order.
+	 // The order they resolve in defines which turn they think they are.
+	 // sleeping here gives plenty of time for them to resolve.
+	 // Should find a real solution to enforce ordering.
+	 await sleep(30);
      }
  });
+
+ const coordinator = new TurnCoordinator({dataDir: dataDir, updateExportString: updateExportString, loadTurn: loadTurn});
 </script>
 
 <template>
