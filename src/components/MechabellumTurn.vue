@@ -99,7 +99,19 @@ import { CURRENT_VERSION } from '../consts.ts';
      watch(value, () => {
 	 change();
      })
- })
+ });
+ const deviceUpdate = (oldValue: number, newValue: number, delta: number): number => {
+     const total = Object
+	 .values(devices)
+	 .reduce((a, d) => a + d.value, 0);
+     if (total === 8 && delta === 1) {
+	 return oldValue;
+     }
+     if (newValue < 0) {
+	 return oldValue;
+     }
+     return newValue;
+ }
 
  const levelUps = ref(new Set<number>());
  const levelUpUnit = (ident: number) => {
@@ -304,17 +316,17 @@ import { CURRENT_VERSION } from '../consts.ts';
 		<div>Devices</div>
 		<div class="stat-pair">
 		    <div class="icon-button large"><IconRocket /></div>
-		    <NumberInput :value="devices['Sentry Missile']" />
+		    <NumberInput :value="devices['Sentry Missile']" :update="deviceUpdate" />
 		</div>
 
 		<div class="stat-pair">
 		    <div class="icon-button large"><IconShieldGenerator /></div>
-		    <NumberInput :value="devices['Shield Generator']" />
+		    <NumberInput :value="devices['Shield Generator']" :update="deviceUpdate" />
 		</div>
 
 		<div class="stat-pair">
 		    <div class="icon-button large"><IconGun /></div>
-		    <NumberInput :value="devices['Missile Interceptor']" />
+		    <NumberInput :value="devices['Missile Interceptor']" :update="deviceUpdate" />
 		</div>
 	    </div>
 
