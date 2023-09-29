@@ -6,6 +6,8 @@
  import { modifyMech, describeMod } from '../mech-updater';
  import { ModData } from '../data-types';
  import { calculateMechDPS, calculateSurvival } from '../mech-predicates';
+ import { clamp } from '../utils';
+ import NumberInput from '../components/NumberInput.vue';
 
  const props = defineProps<{
      mechName: string,
@@ -16,7 +18,28 @@
 
  const dataDir: DataDir = await loadDataDir(CURRENT_VERSION);
  const levelModTemplate = dataDir.modData['LevelTemplate'];
- let mechLevel = 1;
+ const levelMech = (_oldValue: number, newValue: number, _delta: number) => {
+     const level = clamp(newValue, 1, 9);
+     levelModTemplate.effects = [
+	 {
+	     "property": "level",
+	     "operation": "set",
+	     "value": level.toString(),
+	 },
+	 {
+	     "property": "atk",
+	     "operation": "mul",
+	     "value": (level - 1).toString(),
+	 },
+	 {
+	     "property": "hp",
+	     "operation": "mul",
+	     "value": (level - 1).toString(),
+	 }
+     ];
+     update();
+     return level;
+ };
 
  const baseMechData = dataDir.mechData[mechName]
  const mechData = ref(dataDir.mechData[mechName]);
@@ -25,58 +48,21 @@
  let activeModifiers = ref([]);
  let dps = calculateMechDPS(mechData.value);
  let survivals = calculateSurvival(mechData.value);
-
  function mounted() {
-     update();
- }
-
- function clamp(value: number, min: number, max: number): number {
-     return Math.min(Math.max(value, min), max);
- }
-
- function click(arg: any) {
-     arg.target.classList.toggle("pressed");
-     updateLevelMod();
-     toggleModifier(arg.target.innerText);
- }
-
- function level(change: number){
-     mechLevel = clamp(mechLevel + change, 1, 9);
      update();
  }
 
  function update() {
      updateMechData();
-     updateLevelMod();
      dps = calculateMechDPS(mechData.value);
      survivals = calculateSurvival(mechData.value);
  }
 
  function updateMechData() {
      const modifiers: ModData[] = Object.values(mods)
-			     .filter((mod: any) => activeModifiers.value.includes(mod.name));
+					.filter((mod: any) => activeModifiers.value.includes(mod.name));
      modifiers.push(levelModTemplate);
      mechData.value = modifyMech(baseMechData, modifiers);
- }
-
- function updateLevelMod() {
-     levelModTemplate.effects = [
-	 {
-	     "property": "level",
-	     "operation": "set",
-	     "value": mechLevel.toString(),
-	 },
-	 {
-	     "property": "atk",
-	     "operation": "mul",
-	     "value": (mechLevel - 1).toString(),
-	 },
-	 {
-	     "property": "hp",
-	     "operation": "mul",
-	     "value": (mechLevel - 1).toString(),
-	 }
-     ];
  }
 </script>
 
@@ -84,23 +70,23 @@
     <div class="container">
 	<h1 class="mech-name underlined">{{ mechName }}</h1>
 
-	<div class="level-selector">
-	    <span class="clickable" @click="level(-1)">&#8592;</span>
-	    Level: {{ mechData.level }}
-	    <span class="clickable" @click="level(1)">&#8594;</span>
-	</div>
-
+	<div />
 	<div/>
 
 	<div>
+	    <h3>Modifiers</h3>
 	    <v-select
 		v-model="activeModifiers"
-		:options="mods.map((m) => m.name).filter((mod) => !activeModifiers.includes(mod))"
-		:closeOnSelect="false"
-		@option:selected="update"
-		@option:deselected="update"
-		multiple
+			 :options="mods.map((m) => m.name).filter((mod) => !activeModifiers.includes(mod))"
+			 :closeOnSelect="false"
+			 @option:selected="update"
+			 @option:deselected="update"
+			 multiple
 	    />
+	    <div class="level-selector">
+		<div>Level</div>
+		<NumberInput :update="levelMech" :startValue="1" />
+	    </div>
 	</div>
 
 	<div class="stat-block-group">
@@ -234,7 +220,10 @@
  }
 
  .level-selector {
-     text-align: center;
+     display: grid;
+     grid-template-columns: auto auto 1fr;
+     grid-column-gap: 1em;
+     align-items: center;
  }
 
  >>> {

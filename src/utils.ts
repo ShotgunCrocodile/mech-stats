@@ -52,3 +52,4 @@ export function decode(encodedString: string): Object {
 
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+export const clamp = (value: number, min: number, max: number): number => Math.min(Math.max(value, min), max);

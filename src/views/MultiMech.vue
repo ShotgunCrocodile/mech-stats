@@ -25,15 +25,12 @@
 	    <div class="remove-button" @click="remove(index)">Delete</div>
 	</div>
 	<div class="controls">
-	    <v-select
-		:options="dataDir.mechNames().sort()"
-		v-model="selectedMechName"
-	    />
-	    <!-- <select v-model="selectedMechName">
-		 <option v-for="name in dataDir.mechNames().sort()">
-		 {{ name }}
-		 </option>
-		 </select> -->
+	    <div>
+		<v-select
+		    :options="dataDir.mechNames().sort()"
+		    v-model="selectedMechName"
+		/>
+	    </div>
 	    <div class="plus-button" @click="add">+</div>
 	</div>
     </div>
