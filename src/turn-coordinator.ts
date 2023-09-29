@@ -583,8 +583,12 @@ class Army {
             .forEach((name) => this.unlockUnit(name));
     }
 
+    isUnitUnlocked(name: string): boolean {
+        return this.unlockedUnits.includes(name);
+    }
+
     unlockUnit(name: string) {
-        if (!this.unlockedUnits.includes(name)) {
+        if (!this.isUnitUnlocked(name)) {
             this.unlockedUnits.push(name);
         }
     }
@@ -761,7 +765,7 @@ export class TurnCoordinator {
             const turnNumber = index + 1;
             state.restoreDefaults()
             state.reinforcement = turn.reinforcement.value.slice();
-            state.unitUnlock = turn.unitUnlock.value;
+            state.unitUnlock = this.copyUnitUnlock(turn.unitUnlock.value, army);
 
             this.ensureTowerButtonsSelected(mods, state, turn);
             state.recoveredUnit = turn.recoveredUnit.value;
@@ -794,7 +798,7 @@ export class TurnCoordinator {
                 .concat(mods.transactionsForTurn(turnNumber))
                 .concat(mods.transactionsForModPurchases(turnNumber))
                 .concat(this.transactionsForDevices(turn))
-                .concat(this.transactionsForUnitUnlock(turn.unitUnlock.value, turnNumber, mods))
+                .concat(this.transactionsForUnitUnlock(state.unitUnlock, turnNumber, mods))
                 .concat(this.transactionsForUnitPurchases(turnNumber, mods, newUnitIdents, army))
                 .concat(this.transactionsForUnitUpgrades(turn, army))
                 .concat(this.transactionsForUnitRecovery(state, turnNumber, mods, army))
@@ -814,6 +818,10 @@ export class TurnCoordinator {
         }
 
         this.updateExportString(this.generateExportString(turnSnapshots))
+    }
+
+    private copyUnitUnlock(unitName: string, army: Army): string {
+        return army.isUnitUnlocked(unitName) ? "" : unitName;
     }
 
     copyMechSlots(turn: MechabellumTurnInterface, army: Army): string[] {
