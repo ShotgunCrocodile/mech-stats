@@ -65,7 +65,11 @@ import { CURRENT_VERSION } from '../consts.ts';
  const clickTech = (techName: string) => {
      const prior = techs.value[selectedTechUnit.value][techName].boughtOn;
      let newValue = props.turnNumber;
-     if (prior === props.turnNumber) {
+     const techCount = Object
+	 .values(techs.value[selectedTechUnit.value])
+	 .filter((v: {boughtOn: number}) => v.boughtOn < 999)
+	 .length;
+     if (prior === props.turnNumber || techCount === 4) {
 	 newValue = 999;
      }
      techs.value[selectedTechUnit.value][techName].boughtOn = newValue;
