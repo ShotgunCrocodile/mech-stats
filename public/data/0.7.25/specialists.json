@@ -1,5 +1,6 @@
 {
     "Aerial Specialist": {
+	"gameid": 20021,
 	"name": "Aerial Specialist",
 
 	"tags": ["Air", "Starter"],
@@ -19,6 +20,7 @@
 	]
     },
     "Marksman Specialist": {
+	"gameid": 20029,
 	"name": "Marksman Specialist",
 	"tags": ["Starter"],
 	"hooks": [
@@ -37,6 +39,7 @@
 	]
     },
     "Elite Specialist": {
+	"gameid": 20032,
 	"name": "Elite Specialist",
 	"tags": ["Starter"],
 	"transactions": [
@@ -59,6 +62,7 @@
 	]
     },
     "Rhino Specialist": {
+	"gameid": 20033,
 	"name": "Rhino Specialist",
 	"tags": ["Starter"],
 	"hooks": [
@@ -77,6 +81,7 @@
 	]
     },
     "Quick Supply Specialist": {
+	"gameid": 10010,
 	"name": "Quick Supply Specialist",
 	"tags": ["Starter"],
 	"effects": [
@@ -146,6 +151,7 @@
 	]
     },
     "Senior Defense Specialist": {
+	"gameid": 20031,
 	"name": "Senior Defense Specialist",
 	"price": "250",
 	"tags": ["Mech"],
@@ -173,6 +179,7 @@
     },
 
     "Heavy Armor Specialist": {
+	"gameid": 20035,
 	"name": "Heavy Armor Specialist",
 
 	"tags": ["Mech", "Starter"],
@@ -187,6 +194,7 @@
 
     },
     "Cost Control Specialist": {
+	"gameid": 20034,
 	"name": "Cost Control Specialist",
 
 	"tags": ["Mech", "Starter"],
@@ -212,6 +220,7 @@
 	]
     },
     "Supply Specialist": {
+	"gameid": 10002,
 	"name": "Supply Specialist",
 	"price": "50",
 
@@ -232,6 +241,7 @@
     },
 
     "Speed Specialist": {
+	"gameid": 20024,
 	"name": "Speed Specialist",
 	"price": "100",
 	"tags": ["Mech", "Starter"],
@@ -247,6 +257,7 @@
     },
 
     "Giant Specialist": {
+	"gameid": 20005,
 	"name": "Giant Specialist",
 
 	"tags": ["Giant", "Starter"],
@@ -261,6 +272,7 @@
     },
 
     "Giant Hunter": {
+	"gameid": 10005,
 	"name": "Giant Hunter",
 	"price": "100",
 	"tags": ["Reinforcement"]
@@ -329,11 +341,13 @@
 	]
     },
     "Strike Specialist": {
+	"gameid": 10009,
 	"name": "Strike Specialist",
 	"price": "0",
 	"tags": ["Reinforcement"]
     },
     "Tech Specialist": {
+	"gameid": 20003,
 	"name": "Tech Specialist",
 	"price": "50",
 	"tags": ["Reinforcement"]

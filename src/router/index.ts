@@ -35,11 +35,6 @@ const router = createRouter({
             name: 'build-planner',
             component: () => import('../views/BuildPlanner.vue'),
         },
-        // {
-        //     path: '/replay',
-        //     name: 'replay',
-        //     component: () => import('../views/Replay.vue'),
-        // },
         {
             path: '/map',
             name: 'map',
@@ -49,6 +44,11 @@ const router = createRouter({
             path: '/openings',
             name: 'opening',
             component: () => import('../views/Openings.vue'),
+        },
+        {
+            path: '/replay',
+            name: 'replay',
+            component: () => import('../views/Replay.vue'),
         },
     ]
 })

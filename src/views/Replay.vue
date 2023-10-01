@@ -1,38 +1,68 @@
 <script setup lang="ts">
- import { ref } from 'vue';
- import { createReplay, Replay } from '../replay.ts';
-import ReplayPlayer from '../components/ReplayPlayer.vue';
+ import { ref, onMounted } from 'vue';
+ import { Replay } from '../replay';
+ import { REPLAY, CURRENT_VERSION } from '../consts';
+ import { DataDir, loadDataDir } from '../data-loader';
 
- const replay = ref();
+ import NumberInput from '../components/NumberInput.vue';
+ import ReplayPlayer from '../components/ReplayPlayer.vue';
+ import ReplayRound from '../components/ReplayRound.vue';
 
- function change(ev)  {
-     const file = ev.target.files[0];
-     const reader = new FileReader();
-
-     reader.onload = function fileReadCompleted() {
-	 replay.value = createReplay(reader.result);
-     };
-     reader.readAsText(file);
+ const replay = ref(Replay.fromXML(REPLAY));
+ const round = ref(1);
+ const stupid = {
+     "round": round,
  }
+ const dataDir: DataDir = await loadDataDir(CURRENT_VERSION);
+
+ const changeRound = (oldValue, newValue, delta): number => {
+     return Math.max(
+	 1,
+	 Math.min(
+	     replay.value.players[0].roundRecords.length - 1,
+	     newValue)
+     );
+ };
 </script>
 
 <template>
-    <input type="file" id="file-selector" accept=".grbr" @change="change">
-
-    <div class="player-container">
-	<div v-if="replay !== undefined" v-for="player in replay.players">
-	    <ReplayPlayer :player="player" :key="player.name" />
+    <!-- <input type="file" id="file-selector" accept=".grbr" @change="change"> -->
+    <div class="replay-container">
+	<div class="replay-header">
+	    <div>
+		Round
+	    </div>
+	    <NumberInput
+		:value="stupid['round']"
+		:update="changeRound"
+	    />
+	</div>
+	<div v-for="(round, index) in replay.players[0].roundRecords">
+	    <div v-if="index == round">
+		<ReplayRound
+		    :blue="replay.players[0].roundRecords[index]"
+                    :red="replay.players[1].roundRecords[index]"
+		    :dataDir="dataDir"
+		/>
+	    </div>
 	</div>
     </div>
 </template>
 
 
 <style scoped>
- .player-container {
+ .replay-container {
      display: grid;
-     grid-template-columns: 1fr 1fr;
-     grid-column-gap: 0.5em;
+     grid-template-rows: min-content auto;
+     grid-row-gap: 1em;
+     border-bottom: 1px solid var(--color-border);
+     justify-content: center;
+ }
 
-     background-color: blue;
+ .replay-header {
+     display: grid;
+     grid-template-columns: min-content min-content;
+     grid-column-gap: 1em;
+     align-items: center;
  }
 </style>

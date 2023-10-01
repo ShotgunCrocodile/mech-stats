@@ -3,14 +3,14 @@ import { deepCopy } from './utils';
 
 export class DataDir {
     mechData: Map<string, MechData>;
-    modData: Map<string, ModData>;
+    modData: { [k: string]: ModData };
     startData: string[][];
     priceData: Map<string, Map<string, number>>;
     deviceData: { [k: string]: Object };
 
     constructor(
         mechData: Map<string, MechData>,
-        modData: Map<string, ModData>,
+        modData: { [k: string]: ModData },
         startData: string[][],
         priceData: Object,
         deviceData: { [k: string]: Object },
@@ -86,6 +86,14 @@ export class DataDir {
 
     deviceForName(name: string): Object | undefined {
         return this.deviceData[name];
+    }
+
+    objectForGameId(gameID: number): Object | undefined {
+        const mods = Object.values(this.modData).filter((m: any) => m.gameid === gameID);
+        if (mods.length === 1) {
+            return mods[0];
+        }
+        return undefined;
     }
 }
 

@@ -6,7 +6,7 @@
  <router-view v-slot="{ Component }">
     <suspense timeout="0">
 	<template #default>
-	    <div class-="root-container">
+	    <div class="root-container">
 		<div class="header">
 		    <h1><a href="/">Mech Overlord</a></h1>
 		</div>
