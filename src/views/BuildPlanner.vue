@@ -84,7 +84,7 @@
 		Export
 	    </div>
 	    <div v-if="showExport" class="show-export">
-		<div>Copy the below for a direct link to this build. I know its super ugly. For the time being if you want a shorter link for now you will need to use a link sortener service.</div>
+		<div>Copy the below for a direct link to this build. I know its super ugly. For the time being if you want a shorter link for now you will need to use a link shortener service.</div>
 		<div>{{ exportData }}</div>
 	    </div>
 	</div>
