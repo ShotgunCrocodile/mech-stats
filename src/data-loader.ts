@@ -31,7 +31,7 @@ export class DataDir {
         if (mech === undefined) {
             throw new Error("Could not find mech named " + name);
         }
-        return [name].concat(mech.tags);
+        return [name, "Mech"].concat(mech.tags);
     }
 
     modsForTags(tags: string[]): ModData[] {
