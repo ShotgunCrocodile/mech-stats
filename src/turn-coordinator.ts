@@ -871,6 +871,7 @@ export class TurnCoordinator {
                                 "price": `${info.price + surcharge}`,
                                 "turn": turn.toString(),
                             }
+                            surcharge += 200;
                             return transaction;
                         }
                         else if (info.boughtOn < turn) {
