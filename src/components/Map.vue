@@ -803,7 +803,7 @@
 	    ref="canvasRef"
 	    @mousemove="mousemove"
 	    @click="mouseclick"
-	    @keydown="rotate"
+	    @keydown.r="rotate"
 	    @mouseleave="mouseout"
 	></canvas>
 	<div class="map-editor-container">
@@ -855,10 +855,12 @@
 			v-bind:class="{'selected': objectOnMouse?.name === mech.name}"
 			@click="placeMech(mech.name)">{{mech.name}}</div>
 		</div>
+		<span>Press r to rotate held unit.</span>
 	    </div>
 	    <div class="control-container"
 		 v-if="tab ==='Move'">
 		<span>Click on deployed units to move them.</span>
+		<span>Press r to rotate held unit.</span>
 	    </div>
 	    <div class="control-container"
 		 v-if="tab ==='Delete'">
