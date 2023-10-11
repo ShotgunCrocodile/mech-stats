@@ -2,6 +2,7 @@
  import IconCalculator from './icons/IconCalculator.vue';
  import IconAbacus from './icons/IconAbacus.vue';
  import IconPlay from './icons/IconPlay.vue';
+ import IconBoard from './icons/IconBoard.vue';
  import WelcomeItem from './WelcomeItem.vue';
 </script>
 
@@ -33,6 +34,20 @@
 	    </template>
 
 	    Calculate how much cash you have on a turn given any combination of specialists and purchases.
+	</WelcomeItem>
+
+	<WelcomeItem>
+	    <template #icon>
+		<IconBoard />
+	    </template>
+
+	    <template #title>
+		<a href="/map">
+		    Map vizualizer
+		</a>
+	    </template>
+
+	    Map vizualizer tool that allows you to place units on a representation of the game board. Can generate permanent links to share formations.
 	</WelcomeItem>
 
 </template>

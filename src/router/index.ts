@@ -40,6 +40,11 @@ const router = createRouter({
         //     name: 'replay',
         //     component: () => import('../views/Replay.vue'),
         // },
+        {
+            path: '/map',
+            name: 'map',
+            component: () => import('../views/MapView.vue'),
+        },
     ]
 })
 

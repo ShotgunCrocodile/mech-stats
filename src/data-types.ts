@@ -12,6 +12,10 @@ export type MechData = {
     projectiles: number;
     units: number;
     regeneration: number;
+    dimension: {
+        width: number,
+        height: number,
+    };
 };
 
 

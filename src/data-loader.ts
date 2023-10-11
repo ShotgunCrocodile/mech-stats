@@ -1,4 +1,5 @@
 import type { MechData, ModData } from './data-types';
+import { deepCopy } from './utils';
 
 export class DataDir {
     mechData: Map<string, MechData>;
@@ -23,7 +24,12 @@ export class DataDir {
     }
 
     mechNames(): string[] {
-        return Object.keys(this.mechData);
+        return Object.keys(this.mechData).sort();
+    }
+
+    allMechs(): { [k: string]: MechData } {
+        return Object.fromEntries(this.mechNames()
+            .map((name) => [name, this.mechForName(name)!]));
     }
 
     mechTags(name: string): string[] {
@@ -56,7 +62,7 @@ export class DataDir {
     mechForName(name: string): MechData | undefined {
         for (const mech of Object.values(this.mechData)) {
             if (mech.name === name) {
-                return mech;
+                return deepCopy(mech);
             }
         }
         return undefined;
