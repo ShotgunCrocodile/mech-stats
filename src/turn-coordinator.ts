@@ -802,7 +802,8 @@ export class TurnCoordinator {
                 .concat(this.transactionsForUnitPurchases(turnNumber, mods, newUnitIdents, army))
                 .concat(this.transactionsForUnitUpgrades(turn, army))
                 .concat(this.transactionsForUnitRecovery(state, turnNumber, mods, army))
-                .concat(this.transactionsForUnitTech(turn.turnNumber));
+                .concat(this.transactionsForUnitTech(turn.turnNumber))
+                .concat(this.transactionsForUnitUpkeep(army, turn.turnNumber));
             state.tallyTransactions();
             army.removeUnit(state.recoveredUnit);
 
@@ -857,6 +858,28 @@ export class TurnCoordinator {
                 }
             })
             .filter(isDefined);
+    }
+
+    transactionsForUnitUpkeep(army: Army, turn: number): Transaction[] {
+        return Object.values(army.units)
+            .filter((unit: Unit) => unit.baseModel.upkeep > 0 && unit.turnPurchased < turn)
+            .map((unit: Unit) => {
+                // This is unfortunatly a special case where efficient maintenance only
+                // applies AFTER the turn its selected so our normal way of selecting
+                // techs and blanket applying them will wind up giving the discount a turn
+                // early. So we just hardcode it here. If they add more upkeep mechanics
+                // this will need to be addressed.
+                let mech = deepCopy(unit.baseModel);
+                let mod = this.techs.techs[unit.baseModel.name]["Efficient Maintenance"];
+                if (mod && mod.boughtOn < turn) {
+                    mech = modifyMech(mech, [this.dataDir.modForName(mod.name)!]);
+                }
+                return {
+                    "name": `${mech.name} Upkeep`,
+                    "price": `${mech.upkeep}`,
+                    "turn": turn.toString(),
+                }
+            })
     }
 
     transactionsForUnitTech(turn: number): Transaction[] {

@@ -7,6 +7,7 @@ export type MechData = {
     cost: number;
     unlock: number;
     upgrade: number;
+    upkeep: number;
     tags: string[];
     interval: number;
     projectiles: number;
