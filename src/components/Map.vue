@@ -14,6 +14,7 @@
  const backgroundColor = ref(null);
  const gridColor = ref(null);
  const towerColor = ref(null);
+ const enemyUnitColor = ref(null);
  const unitColor = ref(null);
 
 
@@ -33,6 +34,7 @@
  const DEFAULT_GRID_COLOR = 'rgba(0,0,0,0.5)';
  const DEFAULT_TOWER_COLOR = 'blue';
  const DEFAULT_UNIT_COLOR = getComputedStyle(document.documentElement).getPropertyValue('--color-text-accent');
+ const DEFAULT_ENEMY_UNIT_COLOR = getComputedStyle(document.documentElement).getPropertyValue('--color-text-negative');
  const TILE_SIZE = 10;
 
  export interface Props {
@@ -274,6 +276,7 @@
      gridColor.value = DEFAULT_GRID_COLOR;
      towerColor.value = DEFAULT_TOWER_COLOR;
      unitColor.value = DEFAULT_UNIT_COLOR;
+     enemyUnitColor.value = DEFAULT_ENEMY_UNIT_COLOR;
      setupCanvas();
      objects.value = loadObjects();
      console.log(objects.value);
@@ -286,6 +289,7 @@
      y: number;
      width: number;
      height: number;
+     style: string;
      render: (x: number, y: number, width: number, height: number) => void;
  };
 
@@ -301,7 +305,7 @@
      const height = params.drawable.height * TILE_SIZE;
      const xAnchor = params.drawable.x - width / 2;
      const yAnchor = params.drawable.y - height / 2;
-     params.drawable.render(xAnchor, yAnchor, width, height);
+     params.drawable.render(xAnchor, yAnchor, width, height, params.drawable?.style);
  };
 
  const getTransformedPoint = (point: IPoint): IPoint => {
@@ -324,8 +328,24 @@
      objectOnMouse.value.x = point.x;
      objectOnMouse.value.y = point.y;
      snapToGrid(objectOnMouse.value);
+     selectTeamColor(objectOnMouse.value);
      drawCanvas();
  };
+
+ const selectTeamColor = (object: IDrawable) => {
+     object.style = unitColor.value;
+     if (object.y > 0) teamFlip(object);
+     if (object.x < -300 || object.x > 300) teamFlip(object);
+ }
+
+ const teamFlip = (object: IDrawable) => {
+     if (object.style === unitColor.value) {
+	 object.style = enemyUnitColor.value;
+     }
+     else if (object.style === enemyUnitColor.value) {
+	 object.style = unitColor.value;
+     }
+ }
 
  const mouseclick = (event: MouseEvent) =>  {
      let point = getTransformedPoint({x: event.offsetX, y: event.offsetY});
@@ -397,7 +417,7 @@
 	 width: mech.dimension.width,
 	 height: mech.dimension.height,
 	 render: vectorGraphics[mechName],
-
+	 style: unitColor.value,
      };
      objectOnMouse.value = obj;
      focusCanvas();
@@ -405,13 +425,13 @@
 
 
  const vectorGraphics = {
-     "VULCAN": (x: number, y: number, width: number, height: number) => {
+     "VULCAN": (x: number, y: number, width: number, height: number, style: string) => {
 	 const HW = width / 2;
 	 const QW = width / 4;
 	 const QH = height / 4;
 	 ctx.save();
 	 ctx.lineWidth = 2;
-	 ctx.strokeStyle = unitColor.value;
+	 ctx.strokeStyle = style;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
 
@@ -442,14 +462,14 @@
 	 ctx.stroke(path);
 	 ctx.restore();
      },
-     "MELTING POINT": (x: number, y: number, width: number, height: number) => {
+     "MELTING POINT": (x: number, y: number, width: number, height: number, style: string) => {
 	 const HW = width / 2;
 	 const HH = height / 2;
 	 const QW = width / 4;
 	 const QH = height / 4;
 	 ctx.save();
 	 ctx.lineWidth = 2;
-	 ctx.strokeStyle = unitColor.value;
+	 ctx.strokeStyle = style;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
 
@@ -470,14 +490,14 @@
 	 ctx.stroke(path);
 	 ctx.restore();
      },
-     "MARKSMAN": (x: number, y: number, width: number, height: number) => {
+     "MARKSMAN": (x: number, y: number, width: number, height: number, style: string) => {
 	 const FW = width / 3;
 	 const FH = height / 3;
 	 const HW = width / 2;
 	 const HH = height / 2;
 	 ctx.save();
 	 ctx.lineWidth = 1;
-	 ctx.strokeStyle = unitColor.value;
+	 ctx.strokeStyle = style;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
 
@@ -493,14 +513,14 @@
 	 ctx.restore();
 
      },
-     "ARCLIGHT": (x: number, y: number, width: number, height: number) => {
+     "ARCLIGHT": (x: number, y: number, width: number, height: number, style: string) => {
 	 const QW = width / 4;
 	 const QH = height / 4;
 	 const FH = height / 8;
 	 const HW = width / 2;
 	 ctx.save();
 	 ctx.lineWidth = 1;
-	 ctx.strokeStyle = unitColor.value;
+	 ctx.strokeStyle = style;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
 
@@ -516,7 +536,7 @@
 	 ctx.stroke(path);
 	 ctx.restore();
      },
-     "CRAWLER": (x: number, y: number, width: number, height: number) => {
+     "CRAWLER": (x: number, y: number, width: number, height: number, style: string) => {
 	 const limits = {x: 8, y: 3};
 	 const steps = {x: 5.5, y: 5};
 	 if (width < height) {
@@ -527,7 +547,7 @@
 	 ctx.lineWidth = 1;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
-	 ctx.fillStyle = unitColor.value;
+	 ctx.fillStyle = style;
 	 for (let dx = 1; dx <= limits.x; dx++) {
 	     for (let dy = 1; dy <= limits.y; dy++) {
 
@@ -538,7 +558,7 @@
 	 }
 	 ctx.restore();
      },
-     "FANG": (x: number, y: number, width: number, height: number) => {
+     "FANG": (x: number, y: number, width: number, height: number, style: string) => {
 	 const limits = {x: 6, y: 3};
 	 const steps = {x: 7.14, y: 5};
 	 if (width < height) {
@@ -549,7 +569,7 @@
 	 ctx.lineWidth = 1;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
-	 ctx.fillStyle = unitColor.value;
+	 ctx.fillStyle = style;
 	 for (let dx = 1; dx <= limits.x; dx++) {
 	     for (let dy = 1; dy <= limits.y; dy++) {
 
@@ -560,7 +580,7 @@
 	 }
 	 ctx.restore();
      },
-     "HACKER": (x: number, y: number, width: number, height: number) => {
+     "HACKER": (x: number, y: number, width: number, height: number, style: string) => {
 	 const QW = width / 4;
 	 const QH = height / 4;
 	 const HH = height / 2;
@@ -569,7 +589,7 @@
 	 ctx.lineWidth = 1;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
-	 ctx.strokeStyle = unitColor.value;
+	 ctx.strokeStyle = style;
 
 	 const path = new Path2D(
 	     `M ${x},${y+height} ` +
@@ -589,7 +609,7 @@
 	 ctx.stroke(path);
 	 ctx.restore();
      },
-     "MUSTANG": (x: number, y: number, width: number, height: number) => {
+     "MUSTANG": (x: number, y: number, width: number, height: number, style: string) => {
 	 const limits = {x: 6, y: 2};
 	 const steps = {x: 7.14, y: 6.6};
 	 if (width < height) {
@@ -600,7 +620,7 @@
 	 ctx.lineWidth = 1;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
-	 ctx.fillStyle = unitColor.value;
+	 ctx.fillStyle = style;
 	 for (let dx = 1; dx <= limits.x; dx++) {
 	     for (let dy = 1; dy <= limits.y; dy++) {
 		 ctx.fillRect(x + dx * steps.x - 1, y + dy * steps.y - 2, 3, 4);
@@ -608,7 +628,7 @@
 	 }
 	 ctx.restore();
      },
-     "PHOENIX": (x: number, y: number, width: number, height: number) => {
+     "PHOENIX": (x: number, y: number, width: number, height: number, style: string) => {
 	 const Q = 5;
 	 const limits = {x: 2, y: 1};
 	 const steps = {x: 20, y: 0};
@@ -620,7 +640,7 @@
 	 ctx.lineWidth = 1;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
-	 ctx.strokeStyle = unitColor.value;
+	 ctx.strokeStyle = style;
 	 for (let dx = 0; dx < limits.x; dx++) {
 	     for (let dy = 0; dy < limits.y; dy++) {
 		 const path = new Path2D(
@@ -635,7 +655,7 @@
 	 }
 	 ctx.restore();
      },
-     "RHINO": (x: number, y: number, width: number, height: number) => {
+     "RHINO": (x: number, y: number, width: number, height: number, style: string) => {
 	 const T = width / 3
 	 const Q = width / 4;
 	 const F = width / 5;
@@ -644,7 +664,7 @@
 	 ctx.lineWidth = 1;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
-	 ctx.strokeStyle = unitColor.value;
+	 ctx.strokeStyle = style;
 
 	 const path = new Path2D(
 	     `M ${x},${y+height/2} ` +
@@ -655,7 +675,7 @@
 	 ctx.stroke(path);
 	 ctx.restore();
      },
-     "WASP": (x: number, y: number, width: number, height: number) => {
+     "WASP": (x: number, y: number, width: number, height: number, style: string) => {
 	 const limits = {x: 6, y: 2};
 	 const steps = {x: 7.14, y: 6.6};
 	 if (width < height) {
@@ -666,7 +686,7 @@
 	 ctx.lineWidth = 1;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
-	 ctx.fillStyle = unitColor.value;
+	 ctx.fillStyle = style;
 	 for (let dx = 1; dx <= limits.x; dx++) {
 	     for (let dy = 1; dy <= limits.y; dy++) {
 		 ctx.beginPath();
@@ -676,7 +696,7 @@
 	 }
 	 ctx.restore();
      },
-     "SLEDGEHAMMER": (x: number, y: number, width: number, height: number) => {
+     "SLEDGEHAMMER": (x: number, y: number, width: number, height: number, style: string) => {
 	 const limits = {x: 5, y: 1};
 	 const steps = {x: 8.3, y: 10};
 	 if (width < height) {
@@ -687,7 +707,7 @@
 	 ctx.lineWidth = 1;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
-	 ctx.fillStyle = unitColor.value;
+	 ctx.fillStyle = style;
 	 for (let dx = 1; dx <= limits.x; dx++) {
 	     for (let dy = 1; dy <= limits.y; dy++) {
 		 ctx.fillRect(x + dx * steps.x - 3, y + dy * steps.y - 3, 6, 6, 0, 0, 2*Math.PI);
@@ -695,7 +715,7 @@
 	 }
 	 ctx.restore();
      },
-     "STEEL BALL": (x: number, y: number, width: number, height: number) => {
+     "STEEL BALL": (x: number, y: number, width: number, height: number, style: string) => {
 	 const limits = {x: 4, y: 1};
 	 const steps = {x: 10, y: 10};
 	 if (width < height) {
@@ -706,7 +726,7 @@
 	 ctx.lineWidth = 1;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
-	 ctx.fillStyle = unitColor.value;
+	 ctx.fillStyle = style;
 	 for (let dx = 1; dx <= limits.x; dx++) {
 	     for (let dy = 1; dy <= limits.y; dy++) {
 		 ctx.beginPath();
@@ -716,7 +736,7 @@
 	 }
 	 ctx.restore();
      },
-     "STORMCALLER": (x: number, y: number, width: number, height: number) => {
+     "STORMCALLER": (x: number, y: number, width: number, height: number, style: string) => {
 	 const limits = {x: 4, y: 1};
 	 const steps = {x: 10, y: 10};
 	 if (width < height) {
@@ -727,7 +747,7 @@
 	 ctx.lineWidth = 1;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
-	 ctx.strokeStyle = unitColor.value;
+	 ctx.strokeStyle = style;
 	 for (let dx = 1; dx <= limits.x; dx++) {
 	     for (let dy = 1; dy <= limits.y; dy++) {
 		 ctx.strokeRect(x + dx * steps.x - 3, y + dy * steps.y - 3, 6, 6, 0, 0, 2*Math.PI);
@@ -735,14 +755,14 @@
 	 }
 	 ctx.restore();
      },
-     "FORTRESS": (x: number, y: number, width: number, height: number) => {
+     "FORTRESS": (x: number, y: number, width: number, height: number, style: string) => {
 	 const Q = width / 4;
 	 ctx.save();
 	 ctx.lineWidth = 2;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
 
-	 ctx.fillStyle = unitColor.value;
+	 ctx.fillStyle = style;
 	 ctx.fillRect(x, y, width, Q/2);
 	 ctx.fillRect(x+5, y, width-10, Q);
 	 ctx.fillRect(x+10, y, width-20, 3*Q);
@@ -756,11 +776,11 @@
 
 	 ctx.restore();
      },
-     "OVERLORD": (x: number, y: number, width: number, height: number) => {
+     "OVERLORD": (x: number, y: number, width: number, height: number, style: string) => {
 	 const Q = width / 4;
 	 ctx.save();
 	 ctx.lineWidth = 2;
-	 ctx.strokeStyle = unitColor.value;
+	 ctx.strokeStyle = style;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
 
@@ -773,7 +793,7 @@
 	 ctx.stroke(path);
 	 ctx.restore();
      },
-     "WAR FACTORY": (x: number, y: number, width: number, height: number) => {
+     "WAR FACTORY": (x: number, y: number, width: number, height: number, style: string) => {
 	 const H = width / 2;
 	 const Q = width / 4;
 	 const E = width / 8;
@@ -781,8 +801,7 @@
 	 ctx.lineWidth = 2;
 	 ctx.fillStyle = backgroundColor.value;
 	 ctx.fillRect(x, y, width, height);
-
-	 ctx.fillStyle = unitColor.value;
+	 ctx.fillStyle = style;
 
 	 ctx.fillRect(x + E, y + E, 2*E, 2*E);
 	 ctx.fillRect(x + E + H, y + E, 2*E, 2*E);
@@ -892,6 +911,12 @@
 			    Unit Color
 			</span>
 			<LvColorpicker v-model="unitColor" :value="unitColor" />
+		    </div>
+		    <div class="color-row">
+			<span>
+			    Enemy Unit Color
+			</span>
+			<LvColorpicker v-model="enemyUnitColor" :value="enemyUnitColor" />
 		    </div>
 		    <div class="color-row">
 			<span>
