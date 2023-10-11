@@ -823,6 +823,11 @@
 	    @mousemove="mousemove"
 	    @click="mouseclick"
 	    @keydown.r="rotate"
+	    @keydown.c="setTab('Create')"
+	    @keydown.v="setTab('Move')"
+	    @keydown.d="setTab('Delete')"
+	    @keydown.s="setTab('Colors')"
+	    @keydown.e="setTab('Export')"
 	    @mouseleave="mouseout"
 	></canvas>
 	<div class="map-editor-container">
@@ -832,31 +837,31 @@
 		     v-bind:class="{'selected': tab==='Create'}"
 		     @click="setTab('Create')"
 		>
-		    Create
+		    <u>C</u>reate
 		</div>
 		<div class="tab-button clickable"
 		     v-bind:class="{'selected': tab==='Move'}"
 		     @click="setTab('Move')"
 		>
-		    Move
+		    Mo<u>v</u>e
 		</div>
 		<div class="tab-button clickable"
 		     v-bind:class="{'selected': tab==='Delete'}"
 		     @click="setTab('Delete')"
 		>
-		    Delete
+		    <u>D</u>elete
 		</div>
 		<div class="tab-button clickable"
 		     v-bind:class="{'selected': tab==='Colors'}"
 		     @click="setTab('Colors')"
 		>
-		    Colors
+		    Color<u>s</u>
 		</div>
 		<div class="tab-button clickable"
 		     v-bind:class="{'selected': tab==='Export'}"
 		     @click="setTab('Export')"
 		>
-		    Export
+		    <u>E</u>xport
 		</div>
 	    </div>
 
@@ -930,7 +935,9 @@
 	    </div>
 	    <div class="export-container"
 		 v-if="tab ==='Export'">
-		{{exportValue}}
+		<div>Right click the map to save as an image.</div>
+		<div>To link someone to this page use the generated link below:</div>
+		<div>{{exportValue}}</div>
 	    </div>
 
 
@@ -943,7 +950,7 @@
 
  .export-container{
      display: grid;
-     grid-auto-rows: 1fr;
+     grid-auto-rows: auto auto 1fr;
      overflow-wrap: anywhere;
      padding: 10px;
      background-color: var(--color-background-soft);
