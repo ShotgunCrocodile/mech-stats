@@ -3,6 +3,7 @@
  import IconAbacus from './icons/IconAbacus.vue';
  import IconPlay from './icons/IconPlay.vue';
  import IconBoard from './icons/IconBoard.vue';
+ import IconBook from './icons/IconBook.vue';
  import WelcomeItem from './WelcomeItem.vue';
 </script>
 
@@ -48,6 +49,18 @@
 	    </template>
 
 	    Map vizualizer tool that allows you to place units on a representation of the game board. Can generate permanent links to share formations.
+	</WelcomeItem>
+
+	<WelcomeItem>
+	    <template #icon>
+		<IconBook />
+	    </template>
+
+	    <template #title>
+		<a href="/openings">Openings</a>
+	    </template>
+
+	    Placements for your initial units. Currently this is only placements to defeat early steel ball aggression.
 	</WelcomeItem>
 
 </template>

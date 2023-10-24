@@ -45,6 +45,11 @@ const router = createRouter({
             name: 'map',
             component: () => import('../views/MapView.vue'),
         },
+        {
+            path: '/openings',
+            name: 'opening',
+            component: () => import('../views/Openings.vue'),
+        },
     ]
 })
 
