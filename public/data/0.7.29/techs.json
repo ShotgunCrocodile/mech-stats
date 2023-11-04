@@ -1,0 +1,594 @@
+{
+    "Range": {
+	"name": "Range",
+
+	"tags": ["Ranged"],
+
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "40"
+	    }
+	]
+
+    },
+    "Elite Marksmen": {
+	"name": "Elite Marksmen",
+
+	"tags": ["HasEM"],
+
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "8L"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "0.2L"
+	    }
+	]
+    },
+    "Base Armor": {
+	"name": "Armor Enhancement",
+
+	"tags": ["HasArmor"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.2"
+	    },
+	    {
+		"property": "reduction",
+		"operation": "add",
+		"value": "60L"
+	    }
+	]
+    },
+    "Giant Armor": {
+	"name": "Armor Enhancement",
+
+	"tags": ["Giant", "RHINO", "WRAITH"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.35"
+	    },
+	    {
+		"property": "reduction",
+		"operation": "add",
+		"value": "60L"
+	    }
+	]
+    },
+    "Jump Drive": {
+	"name": "Jump Drive",
+
+	"tags": ["Air"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    }
+	]
+
+    },
+    "Armor Piercing Bullets": {
+	"name": "Armor-Piercing Bullets",
+
+	"tags": ["HasAP"],
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "0.5"
+	    }
+	]
+    },
+    "High Explosive Ammo": {
+	"name": "High-Explosive Ammo",
+
+	"tags": ["HasHE"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-0.4"
+	    },
+	    {
+		"property": "splash",
+		"operation": "add",
+		"value": "7"
+	    }
+	]
+    },
+    "Small High Explosive Ammo": {
+	"name": "High-Explosive Ammo",
+
+	"tags": ["HasSmallHE"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-0.4"
+	    },
+	    {
+		"property": "splash",
+		"operation": "add",
+		"value": "5"
+	    }
+	]
+    },
+    "Field Maintenance": {
+	"name": "Field Maintenance",
+
+	"tags": ["HasFM"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.30"
+	    },
+	    {
+		"property": "regeneration",
+		"operation": "set",
+		"value": ".045"
+	    }
+	]
+    },
+    "Damage Sharing": {
+	"name": "Damage Sharing",
+
+	"tags": ["HasDS"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "1.2"
+	    }
+	]
+    },
+    "Energy Absorption": {
+	"name": "Energy Absorption",
+
+	"tags": ["HasEA"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.4"
+	    }
+	]
+    },
+    "Giant Launcher Overload": {
+	"name": "Launcher Overload",
+
+	"tags": ["HasGiantLO"],
+
+	"effects": [
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "-.50"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-20"
+	    }
+	]
+    },
+
+
+    "Crawler Mech Rage": {
+	"name": "Mechanical Rage",
+
+	"tags": ["CRAWLER"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    },
+	    {
+		"property": "interval",
+		"operation": "add",
+		"value": "-0.4"
+	    }
+	]
+    },
+    "Subterranean Blitz": {
+	"name": "Subteranean Blitz",
+
+	"tags": ["CRAWLER"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    }
+	]
+    },
+    "Impact Drill": {
+	"name": "Impact Drill",
+
+	"tags": ["CRAWLER"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "2"
+	    }
+	]
+    },
+
+    "Fang Mech Rage": {
+	"name": "Mechanical Rage",
+
+	"tags": ["FANG"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    },
+	    {
+		"property": "interval",
+		"operation": "add",
+		"value": "-0.5"
+	    }
+	]
+
+    },
+
+    "Marksmen Double Shot": {
+	"name": "Double Shot",
+
+	"tags": ["MARKSMAN"],
+
+	"effects": [
+	    {
+		"property": "projectiles",
+		"operation": "set",
+		"value": "2"
+	    },
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "0.15"
+	    }
+	]
+
+    },
+    "Quick Reload": {
+	"name": "Quick Reload",
+
+	"tags": ["MARKSMAN"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-0.5"
+	    },
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "-0.5"
+	    }
+	]
+    },
+    "Assault Mode": {
+	"name": "Assault Mode",
+	"tags": [
+	    "MARKSMAN"
+	],
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-70"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "5"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    },
+	    {
+		"property": "splash",
+		"operation": "add",
+		"value": "9"
+	    }
+	]
+    },
+
+    "Arclight Charge Shot": {
+	"name": "Charge Shot",
+
+	"tags": ["ARCLIGHT"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "2"
+	    }
+	]
+    },
+    "Arclight Anti Aircraft": {
+	"name": "Anti-Aircraft Ammunition",
+
+	"tags": ["ARCLIGHT"],
+
+	"effects": [
+	    {
+		"property": "targets",
+		"operation": "set",
+		"value": "ground, air"
+	    }
+	]
+    },
+
+    "Sledgehammer Mech Rage": {
+	"name": "Mechanical Rage",
+
+	"tags": ["SLEDGEHAMMER"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "4"
+	    },
+	    {
+		"property": "interval",
+		"operation": "add",
+		"value": "-1.5"
+	    }
+	]
+    },
+    "Sledgehammer Armor Piercing": {
+	"name": "Armor-Piercing Bullets",
+
+	"tags": ["SLEDGEHAMMER"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "1.5"
+	    },
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "0.2"
+	    }
+	]
+    },
+
+    "Heavy Target": {
+	"name": "Heavy Target",
+
+	"tags": ["STEEL BALL"],
+
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "10"
+	    }
+	]
+    },
+
+    "Stormcaller Launcher Overload": {
+	"name": "Launcher Overload",
+
+	"tags": ["STORMCALLER"],
+
+	"effects": [
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "-0.5"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-40"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    }
+	]
+    },
+    "High Explosive Anti Tank Shells": {
+	"name": "High Explosive Anti-Tank Shells",
+
+	"tags": ["STORMCALLER"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "1"
+	    },
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": ".15"
+	    }
+	]
+    },
+
+    "Phoenix Launcher Overload": {
+	"name": "Phoenix Launcher Overload",
+
+	"tags": ["PHOENIX"],
+
+	"effects": [
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": ".15"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-25"
+	    }
+	]
+    },
+    "Phoenix Charge Shot": {
+	"name": "Phoenix Charge Shot",
+
+	"tags": ["PHOENIX"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "1.75"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-25"
+	    }
+	]
+    },
+
+    "Rhino Field Maintenance": {
+	"name": "Field Maintenence",
+
+	"tags": ["RHINO"],
+
+	"effects": [
+	    {
+		"property": "regeneration",
+		"operation": "set",
+		"value": ".045"
+	    }
+	]
+    },
+    "Rhino Mech Rage": {
+	"name": "Mechanical Rage",
+
+	"tags": ["RHINO"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    },
+	    {
+		"property": "interval",
+		"operation": "add",
+		"value": "-0.3"
+	    }
+	]
+    },
+    "Power Armor": {
+	"name": "Power Armor",
+
+	"tags": ["RHINO"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.25"
+	    }
+	]
+    },
+
+    "Multiple Control": {
+	"name": "Multiple Control",
+
+	"tags": ["HACKER"],
+
+	"effects": [
+	    {
+		"property": "projectiles",
+		"operation": "set",
+		"value": "5"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-0.83"
+	    }
+	]
+    },
+
+    "Scorching Flames": {
+	"name": "Scorching Flames",
+
+	"tags": ["VULCAN"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "1.25"
+	    }
+	]
+    },
+
+    "Fortress Double Shot": {
+	"name": "Double Shot",
+
+	"tags": ["MARKSMAN"],
+
+	"effects": [
+	    {
+		"property": "projectiles",
+		"operation": "set",
+		"value": "2"
+	    },
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "0.12"
+	    }
+	]
+    },
+
+    "Efficient Maintenance": {
+	"name": "Efficient Maintenance",
+
+	"tags": ["WAR FACTORY"],
+
+	"effects": [
+	    {
+		"property": "upkeep",
+		"operation": "add",
+		"value": "-100"
+	    }
+	]
+    }
+}
