@@ -93,6 +93,10 @@ export class DataDir {
         if (mods.length === 1) {
             return mods[0];
         }
+        const mechs = Object.values(this.mechData).filter((m: any) => m.gameid === gameID);
+        if (mechs.length === 1) {
+            return mechs[0];
+        }
         return undefined;
     }
 }

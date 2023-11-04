@@ -47,7 +47,8 @@ export class PlayerRecord {
     // .BattleRecord.playerRecords.PlayerRecord[0].playerRoundRecords.PlayerRoundRecord[1].actionRecords.MatchActionData
 }
 
-export class Action {
+export class MoveAction {
+    type: string = "move";
     unitIndex: number;
     position: Position;
     rotated: boolean;
@@ -60,7 +61,7 @@ export class Action {
 
     static fromJSON(obj: any): Action | undefined {
         if (obj.hasOwnProperty("moveUnitDatas")) {
-            return new Action(
+            return new MoveAction(
                 obj.moveUnitDatas.MoveUnitData.unitIndex,
                 obj.moveUnitDatas.MoveUnitData.position,
                 obj.moveUnitDatas.MoveUnitData.isRotate === "true",
@@ -87,33 +88,53 @@ export class Action {
 }
 
 
+export class BuyAction {
+    type: string = "buy"
+    unitID: number;
+
+    constructor(unitID: number) {
+        this.unitID = unitID;
+    }
+
+    static fromJSON(obj: any): Action {
+        return new BuyAction(obj.UID);
+    }
+}
+
+type Action = MoveAction | BuyAction;
+const actionFromJSON = (obj: any): Action | undefined => {
+    if (obj["@_xsi:type"] === "PAD_MoveUnit") {
+        return MoveAction.fromJSON(obj);
+    }
+    if (obj["@_xsi:type"] === "PAD_BuyUnit") {
+        return BuyAction.fromJSON(obj);
+    }
+};
+
+
 export class PlayerRoundRecord {
     round: number;
     playerData: PlayerData;
-    // actions: Action[];
+    actions: Action[];
 
-    constructor(params: { round: number, playerData: PlayerData }) {
+    constructor(params: { round: number, playerData: PlayerData, actions: Action[] }) {
         this.round = params.round;
         this.playerData = params.playerData;
+        this.actions = params.actions;
+        console.log(this.actions);
     }
 
     static fromJSON(obj: any): PlayerRoundRecord {
+        console.log(obj);
+        let actions = obj.actionRecords.MatchActionData;
+        if (!Array.isArray(actions)) {
+            actions = [];
+        }
         return new PlayerRoundRecord({
             round: obj.round,
             playerData: PlayerData.fromJSON(obj.playerData),
+            actions: actions.map(actionFromJSON),
         });
-        // let actions = obj.actionRecords.MatchActionData;
-        // if (!Array.isArray(actions)) {
-        //     actions = [];
-        // }
-
-        // return new PlayerRoundRecord(
-        //     obj.round,
-        //     PlayerData.fromJSON(obj.playerData),
-        //     Action.removePriorMoves(actions
-        //         .map((data: any) => Action.fromJSON(data))
-        //         .filter(isDefined)) || [],
-        // );
     }
 
 }
@@ -152,6 +173,61 @@ export class UnitData {
     }
 }
 
+export class UnitStore {
+    units: UnitData[]
+
+    constructor(params: { units: UnitData[] }) {
+        this.units = [];
+        params.units.forEach((unit) => this.addUnit(unit));
+    }
+
+    addUnit(unit: UnitData) {
+        console.log("adding", unit)
+        this.units[unit.index] = unit;
+    }
+
+    applyActions(actions: Action[]) {
+        console.log(actions);
+        actions
+            .filter(isDefined)
+            .forEach((action) => this.applyAction(action))
+    }
+
+    applyAction(action: Action) {
+        console.log("apply action: ", action);
+        if (action.type === "move") {
+            this.applyMoveAction(action as MoveAction);
+        }
+        if (action.type === "buy") {
+            this.applyBuyAction(action as BuyAction);
+        }
+    }
+
+    applyMoveAction(action: MoveAction) {
+        if (action.unitIndex === undefined) return;
+        if (action.position === undefined) return;
+
+        const unit = this.units[action.unitIndex];
+        unit.position = action.position;
+        unit.rotated = action.rotated;
+    }
+
+    applyBuyAction(action: BuyAction) {
+        const index = this.units.length;
+        const newUnit = new UnitData({
+            id: action.unitID,
+            rotated: false,
+            position: {
+                x: 0,
+                y: 0,
+            },
+            level: 1,
+            index: index,
+        });
+        this.addUnit(newUnit);
+    }
+
+}
 
 export class PlayerData {
     // preRoundFightResult: string;
@@ -171,7 +247,6 @@ export class PlayerData {
         return new PlayerData({
             // obj.preRoundFightResult,
             // obj.shop.unlockedUnits,
-            // obj.units.NewUnitData?.map((unitData: any) => UnitData.fromJSON(unitData)) || [],
             officers: PlayerData.loadOfficers(obj.officers),
             units: obj
                 .units

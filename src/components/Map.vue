@@ -40,11 +40,15 @@
  export interface Props {
      width?: number
      height?: number
+     editor?: boolean
+     objects?: [{[k: string]: Object}]
  };
 
  const props = withDefaults(defineProps<Props>(), {
      width: 720,
      height: 600,
+     editor: true,
+     objects: [],
  });
 
  const canvasRef = ref(null);
@@ -225,7 +229,7 @@
 
 
  const loadObjects = () => {
-     const data = route.query.data;
+     const data = props.objects;
      if (!data) return [
 	 {
 	     movable: false,
@@ -260,9 +264,7 @@
 	     render: drawTower,
 	 },
      ];
-     const value = JSON.parse(decode(data));
-     console.log(value.objects);
-     return value
+     return data
 	 .objects
 	 .map((obj) => {
 	     obj.render = vectorGraphics[obj.name] || drawTower;
@@ -830,7 +832,7 @@
 	    @keydown.e="setTab('Export')"
 	    @mouseleave="mouseout"
 	></canvas>
-	<div class="map-editor-container">
+	<div class="map-editor-container" v-if="props.editor">
 
 	    <div class="tab-container">
 		<div class="tab-button clickable"

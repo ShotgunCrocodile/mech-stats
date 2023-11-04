@@ -15,7 +15,11 @@
     </div>
     <div class="rounds-container">
 	<div v-for="round in player.roundRecords.slice(1)">
-	    <ReplayRound :round="round" :dataDir="dataDir" />
+	    <ReplayRound
+		:player="props.player"
+		:round="round"
+		:dataDir="dataDir"
+	    />
 	</div>
     </div>
 </template>

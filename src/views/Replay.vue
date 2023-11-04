@@ -29,7 +29,7 @@
     <!-- <input type="file" id="file-selector" accept=".grbr" @change="change"> -->
     <div class="replay-container">
 	<div class="replay-header">
-	    <div>
+	    <div style="text-align: right">
 		Round
 	    </div>
 	    <NumberInput
@@ -37,15 +37,16 @@
 		:update="changeRound"
 	    />
 	</div>
-	<div v-for="(round, index) in replay.players[0].roundRecords">
-	    <div v-if="index == round">
-		<ReplayRound
-		    :blue="replay.players[0].roundRecords[index]"
-                    :red="replay.players[1].roundRecords[index]"
-		    :dataDir="dataDir"
-		/>
-	    </div>
-	</div>
+	<template v-for="(roundRecord, index) in replay.players[0].roundRecords">
+	    <ReplayRound
+		v-bind:key="index"
+		v-if="index === round"
+		:blue="replay.players[0]"
+		:red="replay.players[1]"
+		:roundNumber="index"
+		:dataDir="dataDir"
+	    />
+	</template>
     </div>
 </template>
 
@@ -61,7 +62,7 @@
 
  .replay-header {
      display: grid;
-     grid-template-columns: min-content min-content;
+     grid-template-columns: 1fr 1fr;
      grid-column-gap: 1em;
      align-items: center;
  }

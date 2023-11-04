@@ -34,19 +34,14 @@ export function* numberSequence(start: number): Generator<number> {
 
 
 export function encode(obj: Object): string {
-    console.log(obj);
-    console.log(JSON.stringify(obj, null, 4));
     const value = JSON.stringify(obj);
     const result = Base64.encode(value);
-    console.log(result);
     return result;
 }
 
 
 export function decode(encodedString: string): Object {
-    console.log(encodedString);
     const decoded = Base64.decode(encodedString);
-    console.log(decoded);
     return JSON.parse(decoded);
 }
 
