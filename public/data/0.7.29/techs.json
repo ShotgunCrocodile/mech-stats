@@ -590,5 +590,23 @@
 		"value": "-100"
 	    }
 	]
+    },
+    "Floating Artillery Array": {
+	"name": "Floating Artillery Array",
+
+	"tags": ["WRAITH"],
+
+	"effects": [
+	    {
+		"property": "projectiles",
+		"operation": "set",
+		"value": "8"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "-3"
+	    }
+	]
     }
 }
