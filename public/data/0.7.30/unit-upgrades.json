@@ -733,12 +733,12 @@
 	    {
 		"property": "atk",
 		"operation": "mul",
-		"value": ".2"
+		"value": ".3"
 	    },
 	    {
 		"property": "hp",
 		"operation": "mul",
-		"value": ".2"
+		"value": ".3"
 	    },
 	    {
 		"property": "speed",

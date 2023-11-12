@@ -1,4 +1,5 @@
 <script setup lang="ts">
+ import { CURRENT_VERSION } from './consts';
 </script>
 
 <template>
@@ -14,6 +15,7 @@
 		</div>
 		<div class="footer">
 		    <div>&copy; 2023 mech-overlord.com</div>
+		    <div>Last updated for: {{ CURRENT_VERSION }}</div>
 		    <div>
 			<a href="/links">related links</a>
 		    </div>
@@ -60,7 +62,11 @@
      margin: 5px;
 
      display: grid;
-     grid-template-columns: 1fr auto;
+     grid-template-columns: 1fr auto auto;
+ }
+
+ .footer div {
+     margin: 1em;
  }
 
  .main {

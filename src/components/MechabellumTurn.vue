@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CURRENT_VERSION } from '../consts.ts';
+ import { CURRENT_VERSION } from '../consts.ts';
  import { ref, onMounted, watch } from 'vue';
  import { loadDataDir, DataDir } from '../data-loader';
  import type { ModData } from '../data-types';
