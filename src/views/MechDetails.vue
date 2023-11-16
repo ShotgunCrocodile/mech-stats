@@ -162,6 +162,13 @@
 			{{ v }}
 		    </div>
 		</div>
+
+		<div class="stat-block">
+		    <div>Other:</div> <div></div>
+
+		    <div title="Crawlers spawned when this unit is killed by a unit with replicate or parasitic.">Crawler Spawns</div> <div> {{ mechData.parasitic }}</div>
+		</div>
+
 	    </div>
 	</div>
     </div>

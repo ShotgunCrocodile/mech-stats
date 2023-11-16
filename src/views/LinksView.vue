@@ -34,13 +34,21 @@
 
 	</div>
 	<div>
-	    <h2>Technical Stuff</h2>
+	    <h2>Technical Credits</h2>
 	    <LinkPageItem url="https://game-icons.net">
 		<template #link>Game-icons.net</template>
 		<template #text>
 		    All icons and graphics used on this site were sourced from the awesome <a href="https://game-icons.net">game-icons.net</a>.
 		</template>
 	    </LinkPageItem>
+
+	    <LinkPageItem url="https://discordapp.com/users/155761751860707328">
+		<template #link>Ghirahn</template>
+		<template #text>
+		    Painstakingly counted the number of units spawned when something is killed by a unit with replicate or parasitic ammo.
+		</template>
+	    </LinkPageItem>
+
 	</div>
 
 	<div></div>

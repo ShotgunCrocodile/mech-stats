@@ -29,7 +29,8 @@
 	"dimension": {
 	    "width": 4,
 	    "height": 4
-	}
+	},
+	"parasitic": 16
     },
     "MARKSMAN": {
 	"gameid": 2,
@@ -60,7 +61,8 @@
 	"dimension": {
 	    "width": 2,
 	    "height": 2
-	}
+	},
+	"parasitic": 9
     },
     "VULCAN": {
 	"gameid": 3,
@@ -90,7 +92,8 @@
 	"dimension": {
 	    "width": 4,
 	    "height": 4
-	}
+	},
+	"parasitic": 16
     },
     "MELTING POINT": {
 	"gameid": 4,
@@ -121,7 +124,8 @@
 	"dimension": {
 	    "width": 4,
 	    "height": 4
-	}
+	},
+	"parasitic": 16
     },
     "RHINO": {
 	"gameid": 5,
@@ -150,7 +154,8 @@
 	"dimension": {
 	    "width": 3,
 	    "height": 3
-	}
+	},
+	"parasitic": 12
     },
     "WASP": {
 	"gameid": 6,
@@ -184,7 +189,8 @@
 	"dimension": {
 	    "width": 5,
 	    "height": 2
-	}
+	},
+	"parasitic": 0
     },
     "MUSTANG": {
 	"gameid": 7,
@@ -216,7 +222,8 @@
 	"dimension": {
 	    "width": 5,
 	    "height": 2
-	}
+	},
+	"parasitic": 1
     },
     "STEEL BALL": {
 	"gameid": 8,
@@ -249,7 +256,8 @@
 	"dimension": {
 	    "width": 5,
 	    "height": 2
-	}
+	},
+	"parasitic": 5
     },
     "FANG": {
 	"gameid": 9,
@@ -280,7 +288,8 @@
 	"dimension": {
 	    "width": 5,
 	    "height": 2
-	}
+	},
+	"parasitic": 1
     },
     "CRAWLER": {
 	"gameid": 10,
@@ -309,7 +318,8 @@
 	"dimension": {
 	    "width": 5,
 	    "height": 2
-	}
+	},
+	"parasitic": 1
     },
     "OVERLORD": {
 	"gameid": 11,
@@ -343,7 +353,8 @@
 	"dimension": {
 	    "width": 4,
 	    "height": 4
-	}
+	},
+	"parasitic": 0
     },
     "STORMCALLER": {
 	"gameid": 12,
@@ -374,7 +385,8 @@
 	    "width": 5,
 	    "height": 2
 	},
-	"speed": 6
+	"speed": 6,
+	"parasitic": 5
     },
     "SLEDGEHAMMER": {
 	"gameid": 13,
@@ -407,7 +419,8 @@
 	"dimension": {
 	    "width": 5,
 	    "height": 2
-	}
+	},
+	"parasitic": 2
     },
     "HACKER": {
 	"gameid": 14,
@@ -437,7 +450,8 @@
 	    "width": 3,
 	    "height": 3
 	},
-	"speed": 8
+	"speed": 8,
+	"parasitic": 12
     },
     "ARCLIGHT": {
 	"gameid": 15,
@@ -469,7 +483,8 @@
 	"dimension": {
 	    "width": 2,
 	    "height": 2
-	}
+	},
+	"parasitic": 9
     },
     "PHOENIX": {
 	"gameid": 16,
@@ -501,7 +516,8 @@
 	"dimension": {
 	    "width": 4,
 	    "height": 2
-	}
+	},
+	"parasitic": 0
     },
     "WAR FACTORY": {
 	"gameid": 17,
@@ -534,7 +550,8 @@
 	"dimension": {
 	    "width": 7,
 	    "height": 7
-	}
+	},
+	"parasitic": 70
     },
     "WRAITH": {
 	"gameid": 18,
@@ -568,7 +585,7 @@
 	"dimension": {
 	    "width": 3,
 	    "height": 3
-	}
-
+	},
+	"parasitic": 0
     }
 }
