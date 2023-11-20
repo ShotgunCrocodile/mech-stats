@@ -59,8 +59,9 @@
  }
 
  function updateMechData() {
-     const modifiers: ModData[] = Object.values(mods)
-					.filter((mod: any) => activeModifiers.value.includes(mod.name));
+     const modifiers: ModData[] = Object
+	 .values(mods)
+	 .filter((mod: any) => activeModifiers.value.includes(mod.name));
      modifiers.push(levelModTemplate);
      mechData.value = modifyMech(baseMechData, modifiers);
  }

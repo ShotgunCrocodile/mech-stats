@@ -10,12 +10,12 @@
 	    {
 		"property": "atk",
 		"operation": "mul",
-		"value": "1"
+		"value": "0"
 	    },
 	    {
 		"property": "hp",
 		"operation": "mul",
-		"value": "1"
+		"value": "0"
 	    }
 	]
     },
