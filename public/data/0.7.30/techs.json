@@ -257,6 +257,19 @@
 	]
 
     },
+    "Portable Shield": {
+	"name": "Portable Shield",
+
+	"tags": ["FANG"],
+
+	"effects": [
+	    {
+		"property": "shielded",
+		"operation": "set",
+		"value": "true"
+	    }
+	]
+    },
 
     "Marksmen Double Shot": {
 	"name": "Double Shot",
@@ -480,6 +493,33 @@
 	    }
 	]
     },
+    "Phoenix Energy Shield": {
+	"name": "Energy Shield",
+
+	"tags": ["PHOENIX"],
+
+	"effects": [
+	    {
+		"property": "shielded",
+		"operation": "set",
+		"value": "true"
+	    }
+	]
+    },
+
+    "Wasp Energy Shield": {
+	"name": "Energy Shield",
+
+	"tags": ["WASP"],
+
+	"effects": [
+	    {
+		"property": "shielded",
+		"operation": "set",
+		"value": "true"
+	    }
+	]
+    },
 
     "Rhino Field Maintenance": {
 	"name": "Field Maintenence",
@@ -562,7 +602,7 @@
     "Fortress Double Shot": {
 	"name": "Double Shot",
 
-	"tags": ["MARKSMAN"],
+	"tags": ["FORTRESS"],
 
 	"effects": [
 	    {

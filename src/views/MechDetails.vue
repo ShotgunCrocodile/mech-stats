@@ -5,7 +5,7 @@
  import { loadDataDir, DataDir } from '../data-loader';
  import { modifyMech, describeMod } from '../mech-updater';
  import { ModData } from '../data-types';
- import { calculateMechDPS, calculateSurvival } from '../mech-predicates';
+ import { calculateMechDPS, calculateSurvival, healthPerSupply } from '../mech-predicates';
  import { clamp } from '../utils';
  import NumberInput from '../components/NumberInput.vue';
 
@@ -118,6 +118,9 @@
 		<div>Health</div>
 		<div>{{ mechData.hp }}</div>
 
+		<div>Shields</div>
+		<div>{{ mechData.shielded ? mechData.hp : 0}}</div>
+
 		<div>Regeneration</div>
 		<div>{{ Math.floor(mechData.regeneration * mechData.hp) + " hp/s" }}</div>
 
@@ -168,6 +171,8 @@
 		    <div>Other:</div> <div></div>
 
 		    <div title="Crawlers spawned when this unit is killed by a unit with replicate or parasitic.">Crawler Spawns</div> <div> {{ mechData.parasitic }}</div>
+
+		    <div>HP per cost:</div> <div>{{ healthPerSupply(mechData) }}</div>
 		</div>
 
 	    </div>

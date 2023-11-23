@@ -1,6 +1,7 @@
 export type MechData = {
     gameid: number;
     name: string;
+    location: string;
     hp: number;
     atk: number;
     level: number;
@@ -17,6 +18,7 @@ export type MechData = {
         width: number,
         height: number,
     };
+    shielded?: boolean;
 };
 
 

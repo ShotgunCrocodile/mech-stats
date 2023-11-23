@@ -95,7 +95,7 @@ function stagesFromMods(mods: ModData[]): ModEffect[][] {
 
 
 function applyMod(baseMech: MechData, mech: MechData, effect: ModEffect): void {
-    if (!mech.hasOwnProperty(effect.property)) {
+    if (effect.operation !== "set" && !mech.hasOwnProperty(effect.property)) {
         throw Error('Mech does not have property ' + effect.property);
     }
     console.log(`applying ${effect.operation} ${effect.property} ${effect.value}`);
@@ -108,10 +108,12 @@ function cloneMech(mech: MechData): MechData {
     return newMech;
 }
 
-function parseValue(baseMech: MechData, property: string, value: string): number | string {
+function parseValue(baseMech: MechData, property: string, value: string): number | string | boolean {
     if (property === "targets") {
         return value;
     }
+    if (value === "true") return true;
+    if (value === "false") return false;
     /// Replace L with the value of the mech's level and multiply.
     return value.split("L")
         .map((p) => p !== "" ? parseFloat(p) : baseMech.level)
