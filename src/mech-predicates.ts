@@ -85,6 +85,7 @@ export function towerKill(mech: MechData) {
 
 export function healthPerSupply(mech: MechData): string {
     const health = mech.shielded ? mech.hp * 2 : mech.hp;
-    return ((mech.units * health) / mech.cost).toFixed(2);
+    const cost = (mech.level - 1) * mech.upgrade + mech.cost;
+    return ((mech.units * health) / cost).toFixed(2);
 
 }
