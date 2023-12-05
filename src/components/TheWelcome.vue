@@ -4,6 +4,7 @@
  import IconPlay from './icons/IconPlay.vue';
  import IconBoard from './icons/IconBoard.vue';
  import IconBook from './icons/IconBook.vue';
+ import IconScrewdriver from './icons/IconScrewdriver.vue';
  import WelcomeItem from './WelcomeItem.vue';
 </script>
 
@@ -61,6 +62,18 @@
 	    </template>
 
 	    Placements for your initial units. Currently this is only placements to defeat early steel ball aggression.
+	</WelcomeItem>
+
+	<WelcomeItem>
+	    <template #icon>
+		<IconScrewdriver />
+	    </template>
+
+	    <template #title>
+		<a href="/replay-shortener">Replay Shortener</a>
+	    </template>
+
+	    Speed up a replay by removing all of the long delays and replacing them with 1 second intervals.
 	</WelcomeItem>
 
 </template>

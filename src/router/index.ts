@@ -50,6 +50,11 @@ const router = createRouter({
             name: 'replay',
             component: () => import('../views/Replay.vue'),
         },
+        {
+            path: '/replay-shortener',
+            name: 'replay-shortener',
+            component: () => import('../views/FixReplay.vue'),
+        },
     ]
 })
 

@@ -4,6 +4,11 @@ import { objectMap, isDefined } from './utils';
 import { loadDataDir, DataDir } from './data-loader';
 
 
+export enum UnitSource {
+    NewUnitData = 1,
+    BoughtUnit,
+};
+
 export class Replay {
     players: PlayerRecord[];
     metadata: BattleInfo;
@@ -59,15 +64,18 @@ export class MoveAction {
         this.rotated = rotated;
     }
 
-    static fromJSON(obj: any): Action | undefined {
+    static fromJSON(obj: any): Action[] | Action | undefined {
         if (obj.hasOwnProperty("moveUnitDatas")) {
-            return new MoveAction(
-                obj.moveUnitDatas.MoveUnitData.unitIndex,
-                obj.moveUnitDatas.MoveUnitData.position,
-                obj.moveUnitDatas.MoveUnitData.isRotate === "true",
-            );
+            if (Array.isArray(obj.moveUnitDatas.MoveUnitData)) {
+                return obj.moveUnitDatas.MoveUnitData.map(MoveAction.fromJSON);
+            }
+            obj = obj.moveUnitDatas.MoveUnitData;
         }
-        return undefined;
+        return new MoveAction(
+            obj.unitIndex,
+            obj.position,
+            obj.isRotate,
+        );
     }
 
     /**
@@ -102,7 +110,7 @@ export class BuyAction {
 }
 
 type Action = MoveAction | BuyAction;
-const actionFromJSON = (obj: any): Action | undefined => {
+const actionFromJSON = (obj: any): Action[] | Action | undefined => {
     if (obj["@_xsi:type"] === "PAD_MoveUnit") {
         return MoveAction.fromJSON(obj);
     }
@@ -121,11 +129,9 @@ export class PlayerRoundRecord {
         this.round = params.round;
         this.playerData = params.playerData;
         this.actions = params.actions;
-        console.log(this.actions);
     }
 
     static fromJSON(obj: any): PlayerRoundRecord {
-        console.log(obj);
         let actions = obj.actionRecords.MatchActionData;
         if (!Array.isArray(actions)) {
             actions = [];
@@ -133,7 +139,7 @@ export class PlayerRoundRecord {
         return new PlayerRoundRecord({
             round: obj.round,
             playerData: PlayerData.fromJSON(obj.playerData),
-            actions: actions.map(actionFromJSON),
+            actions: actions.map(actionFromJSON).flat(),
         });
     }
 
@@ -151,24 +157,27 @@ export class UnitData {
     position: Position;
     level: number;
     index: number;
+    source: UnitSource;
 
-    constructor(params: { id: number, rotated: boolean, position: Position, level: number, index: number }) {
+    constructor(params: { id: number, rotated: boolean, position: Position, level: number, index: number, source: UnitSource }) {
         this.id = params.id;
         this.rotated = params.rotated;
         this.position = params.position;
         this.level = params.level;
         this.index = params.index;
+        this.source = params.source;
     }
 
-    static fromJSON(obj: any): UnitData {
+    static fromJSON(params: { obj: any, source: UnitSource }): UnitData {
         return new UnitData({
-            id: parseInt(obj.id),
-            rotated: obj.IsRotate === "true",
+            id: parseInt(params.obj.id),
+            rotated: params.obj.IsRotate,
             position: objectMap(
-                obj.Position,
+                params.obj.Position,
                 ([key, value]: [string, any]) => [key, parseInt(value)]) as Position,
-            level: parseInt(obj.Level),
-            index: parseInt(obj.Index),
+            level: parseInt(params.obj.Level),
+            index: parseInt(params.obj.Index),
+            source: params.source,
         });
     }
 }
@@ -182,19 +191,16 @@ export class UnitStore {
     }
 
     addUnit(unit: UnitData) {
-        console.log("adding", unit)
         this.units[unit.index] = unit;
     }
 
     applyActions(actions: Action[]) {
-        console.log(actions);
         actions
             .filter(isDefined)
             .forEach((action) => this.applyAction(action))
     }
 
     applyAction(action: Action) {
-        console.log("apply action: ", action);
         if (action.type === "move") {
             this.applyMoveAction(action as MoveAction);
         }
@@ -223,6 +229,7 @@ export class UnitStore {
             },
             level: 1,
             index: index,
+            source: UnitSource.BoughtUnit,
         });
         this.addUnit(newUnit);
     }
@@ -251,7 +258,7 @@ export class PlayerData {
             units: obj
                 .units
                 .NewUnitData
-                ?.map((unitData: any) => UnitData.fromJSON(unitData)) || []
+                ?.map((unitData: any) => UnitData.fromJSON({ obj: unitData, source: UnitSource.NewUnitData })) || []
         });
     }
 

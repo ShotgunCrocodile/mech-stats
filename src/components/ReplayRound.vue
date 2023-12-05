@@ -1,6 +1,6 @@
 <script setup lang="ts">
  import type { MechData } from '../data-types';
- import { PlayerRoundRecord, PlayerRecord, UnitStore } from '../replay';
+ import { PlayerRoundRecord, PlayerRecord, UnitStore, UnitData, UnitSource } from '../replay';
  import { DataDir } from '../data-loader';
 
  import Map from '../components/Map.vue';
@@ -13,7 +13,26 @@
      dataDir: DataDir,
  }>();
 
- const loadUnitFunction = (style) => {
+ enum Team {
+     BLUE = 1,
+     RED,
+ };
+
+ const rotateFlankUnits = (team: Team, unit: UnitData): UnitData => {
+     if (unit.source === UnitSource.NewUnitData) {
+	 console.log("TEST", unit.id)
+  	 return unit;
+     }
+     if (team === Team.BLUE && unit.position.y > 0) {
+ 	 unit.rotated = !unit.rotated;
+     } else if (team == Team.RED && unit.position.y < 0) {
+ 	 unit.rotated = !unit.rotated;
+     }
+     return unit;
+ };
+
+
+ const loadUnitFunction = (team: Team, style) => {
      return (unit) => {
 	 console.log(unit, unit.id);
 	 const mech = props.dataDir.objectForGameId(unit.id);
@@ -21,6 +40,7 @@
 
 	 let width = mech.dimension.width;
 	 let height = mech.dimension.height;
+	 unit = rotateFlankUnits(team, unit);
 	 if (unit.rotated) {
 	     width = mech.dimension.height;
 	     height = mech.dimension.width;
@@ -48,17 +68,18 @@
      blueStore.applyActions(props.blue.roundRecords[props.roundNumber].actions);
      const blueUnits = blueStore
 	 .units
-	 .map(loadUnitFunction("green"));
+	 .map(loadUnitFunction(Team.BLUE, "blue"));
 
      const redStore = new UnitStore({units: props
 	 .red
 	 .roundRecords[props.roundNumber]
 	 .playerData
 	 .units});
+     console.log("RED ACTIONS: ", props.red.roundRecords[props.roundNumber].actions);
      redStore.applyActions(props.red.roundRecords[props.roundNumber].actions);
      const redUnits = redStore
 	 .units
-	 .map(loadUnitFunction("red"));
+	 .map(loadUnitFunction(Team.RED, "red"));
 
      const units = blueUnits.concat(redUnits);
      console.log("units", units);
