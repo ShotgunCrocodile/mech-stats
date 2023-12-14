@@ -1,0 +1,9 @@
+{
+    "Skip": {
+	"name": "Skip",
+	"price": "-50",
+	"tags": [
+	    "Reinforcement"
+	]
+    }
+}
