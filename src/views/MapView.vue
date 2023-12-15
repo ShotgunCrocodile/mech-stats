@@ -8,8 +8,7 @@
  const route = useRoute();
 
  const data = route.query.data;
- console.log(typeof data);
- const preloadedObjects = JSON.parse(decode(data));
+ const preloadedObjects = data ? JSON.parse(decode(data)) : {objects: []};
 </script>
 
 <template>
