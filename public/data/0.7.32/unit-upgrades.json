@@ -933,6 +933,30 @@
 		"value": "100"
 	    }
 	]
-    }
+    },
 
+    "Assault Scorpion" : {
+	"name": "Assault Scorpion",
+	"tags": [
+	    "Reinformceent",
+	    "SCORPION"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "1"
+	    },
+	    {
+		"property": "interval",
+		"operation": "add",
+		"value": "-1.5"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-30"
+	    }
+	]
+    }
 }
