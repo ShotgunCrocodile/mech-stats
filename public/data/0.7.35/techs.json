@@ -1,0 +1,694 @@
+{
+    "Range": {
+	"name": "Range",
+
+	"tags": ["Ranged", "Tech"],
+
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "40"
+	    }
+	]
+
+    },
+    "Elite Marksmen": {
+	"name": "Elite Marksmen",
+
+	"tags": ["HasEM", "Tech"],
+
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "8L"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "0.2L"
+	    }
+	]
+    },
+    "Base Armor": {
+	"name": "Armor Enhancement",
+
+	"tags": ["HasArmor", "Tech"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.2"
+	    },
+	    {
+		"property": "reduction",
+		"operation": "add",
+		"value": "60L"
+	    }
+	]
+    },
+    "Giant Armor": {
+	"name": "Armor Enhancement",
+
+	"tags": ["Giant", "RHINO", "WRAITH", "SCORPION", "Tech"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.35"
+	    },
+	    {
+		"property": "reduction",
+		"operation": "add",
+		"value": "60L"
+	    }
+	]
+    },
+    "Jump Drive": {
+	"name": "Jump Drive",
+
+	"tags": ["Air", "Tech"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    }
+	]
+
+    },
+    "Armor Piercing Bullets": {
+	"name": "Armor-Piercing Bullets",
+
+	"tags": ["HasAP", "Tech"],
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "0.5"
+	    }
+	]
+    },
+    "High Explosive Ammo": {
+	"name": "High-Explosive Ammo",
+
+	"tags": ["HasHE", "Tech"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-0.4"
+	    },
+	    {
+		"property": "splash",
+		"operation": "add",
+		"value": "7"
+	    }
+	]
+    },
+    "Small High Explosive Ammo": {
+	"name": "High-Explosive Ammo",
+
+	"tags": ["HasSmallHE", "Tech"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-0.4"
+	    },
+	    {
+		"property": "splash",
+		"operation": "add",
+		"value": "5"
+	    }
+	]
+    },
+    "Field Maintenance": {
+	"name": "Field Maintenance",
+
+	"tags": ["HasFM", "Tech"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.30"
+	    },
+	    {
+		"property": "regeneration",
+		"operation": "set",
+		"value": ".045"
+	    }
+	]
+    },
+    "Damage Sharing": {
+	"name": "Damage Sharing",
+
+	"tags": ["HasDS", "Tech"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "1.2"
+	    }
+	]
+    },
+    "Energy Absorption": {
+	"name": "Energy Absorption",
+
+	"tags": ["HasEA", "Tech"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.4"
+	    }
+	]
+    },
+    "Giant Launcher Overload": {
+	"name": "Launcher Overload",
+
+	"tags": ["HasGiantLO", "Tech"],
+
+	"effects": [
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "-.50"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-20"
+	    }
+	]
+    },
+
+
+    "Crawler Mech Rage": {
+	"name": "Mechanical Rage",
+
+	"tags": ["CRAWLER", "Tech"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    },
+	    {
+		"property": "interval",
+		"operation": "add",
+		"value": "-0.2"
+	    }
+	]
+    },
+    "Subterranean Blitz": {
+	"name": "Subteranean Blitz",
+
+	"tags": ["CRAWLER", "Tech"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    }
+	]
+    },
+    "Impact Drill": {
+	"name": "Impact Drill",
+
+	"tags": ["CRAWLER", "Tech"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "2"
+	    }
+	]
+    },
+
+    "Fang Mech Rage": {
+	"name": "Mechanical Rage",
+
+	"tags": ["FANG", "Tech"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    },
+	    {
+		"property": "interval",
+		"operation": "add",
+		"value": "-0.5"
+	    }
+	]
+
+    },
+    "Portable Shield": {
+	"name": "Portable Shield",
+
+	"tags": ["FANG", "Tech"],
+
+	"effects": [
+	    {
+		"property": "shielded",
+		"operation": "set",
+		"value": "true"
+	    }
+	]
+    },
+
+    "Marksmen Double Shot": {
+	"name": "Double Shot",
+
+	"tags": ["MARKSMAN", "Tech"],
+
+	"effects": [
+	    {
+		"property": "projectiles",
+		"operation": "set",
+		"value": "2"
+	    },
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "0.15"
+	    }
+	]
+
+    },
+    "Quick Reload": {
+	"name": "Quick Reload",
+
+	"tags": ["MARKSMAN", "Tech"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-0.5"
+	    },
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "-0.5"
+	    }
+	]
+    },
+    "Assault Mode": {
+	"name": "Assault Mode",
+
+	"tags": ["MARKSMAN", "Tech"],
+
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-70"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "5"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    },
+	    {
+		"property": "splash",
+		"operation": "add",
+		"value": "9"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".3"
+	    }
+	]
+    },
+
+    "Arclight Charge Shot": {
+	"name": "Charge Shot",
+
+	"tags": ["ARCLIGHT", "Tech"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "2"
+	    }
+	]
+    },
+    "Arclight Anti Aircraft": {
+	"name": "Anti-Aircraft Ammunition",
+
+	"tags": ["ARCLIGHT", "Tech"],
+
+	"effects": [
+	    {
+		"property": "targets",
+		"operation": "set",
+		"value": "ground, air"
+	    }
+	]
+    },
+
+    "Sledgehammer Mech Rage": {
+	"name": "Mechanical Rage",
+
+	"tags": ["SLEDGEHAMMER", "Tech"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "4"
+	    },
+	    {
+		"property": "interval",
+		"operation": "add",
+		"value": "-1.5"
+	    }
+	]
+    },
+    "Sledgehammer Armor Piercing": {
+	"name": "Armor-Piercing Bullets",
+
+	"tags": ["SLEDGEHAMMER", "Tech"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "1.5"
+	    },
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "0.2"
+	    }
+	]
+    },
+
+    "Heavy Target": {
+	"name": "Heavy Target",
+
+	"tags": ["STEEL BALL", "Tech"],
+
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "10"
+	    }
+	]
+    },
+
+    "Stormcaller Launcher Overload": {
+	"name": "Launcher Overload",
+
+	"tags": ["STORMCALLER", "Tech"],
+
+	"effects": [
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "-0.5"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-40"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    }
+	]
+    },
+    "High Explosive Anti Tank Shells": {
+	"name": "High Explosive Anti-Tank Shells",
+
+	"tags": ["STORMCALLER", "Tech"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "1"
+	    },
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": ".15"
+	    }
+	]
+    },
+
+    "Phoenix Launcher Overload": {
+	"name": "Phoenix Launcher Overload",
+
+	"tags": ["PHOENIX", "Tech"],
+
+	"effects": [
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": ".15"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-25"
+	    }
+	]
+    },
+    "Phoenix Charge Shot": {
+	"name": "Phoenix Charge Shot",
+
+	"tags": ["PHOENIX", "Tech"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "1.75"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-25"
+	    }
+	]
+    },
+    "Phoenix Energy Shield": {
+	"name": "Energy Shield",
+
+	"tags": ["PHOENIX", "Tech"],
+
+	"effects": [
+	    {
+		"property": "shielded",
+		"operation": "set",
+		"value": "true"
+	    }
+	]
+    },
+
+    "Wasp Energy Shield": {
+	"name": "Energy Shield",
+
+	"tags": ["WASP", "Tech"],
+
+	"effects": [
+	    {
+		"property": "shielded",
+		"operation": "set",
+		"value": "true"
+	    }
+	]
+    },
+
+    "Rhino Field Maintenance": {
+	"name": "Field Maintenence",
+
+	"tags": ["RHINO", "Tech"],
+
+	"effects": [
+	    {
+		"property": "regeneration",
+		"operation": "set",
+		"value": ".045"
+	    }
+	]
+    },
+    "Rhino Mech Rage": {
+	"name": "Mechanical Rage",
+
+	"tags": ["RHINO", "Tech"],
+
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    },
+	    {
+		"property": "interval",
+		"operation": "add",
+		"value": "-0.3"
+	    }
+	]
+    },
+    "Power Armor": {
+	"name": "Power Armor",
+
+	"tags": ["RHINO", "Tech"],
+
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.25"
+	    }
+	]
+    },
+
+    "Multiple Control": {
+	"name": "Multiple Control",
+
+	"tags": ["HACKER", "Tech"],
+
+	"effects": [
+	    {
+		"property": "projectiles",
+		"operation": "set",
+		"value": "5"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-0.83"
+	    }
+	]
+    },
+
+    "Scorching Flames": {
+	"name": "Scorching Flames",
+
+	"tags": ["VULCAN", "Tech"],
+
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "1.25"
+	    }
+	]
+    },
+
+    "Fortress Double Shot": {
+	"name": "Double Shot",
+
+	"tags": ["FORTRESS", "Tech"],
+
+	"effects": [
+	    {
+		"property": "projectiles",
+		"operation": "set",
+		"value": "2"
+	    },
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "0.12"
+	    }
+	]
+    },
+
+    "Efficient Maintenance": {
+	"name": "Efficient Maintenance",
+
+	"tags": ["WAR FACTORY", "Tech"],
+
+	"effects": [
+	    {
+		"property": "upkeep",
+		"operation": "add",
+		"value": "-100"
+	    }
+	]
+    },
+    "Floating Artillery Array": {
+	"name": "Floating Artillery Array",
+
+	"tags": ["WRAITH", "Tech"],
+
+	"effects": [
+	    {
+		"property": "projectiles",
+		"operation": "set",
+		"value": "8"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "-3"
+	    }
+	]
+    },
+
+    "Siege Mode": {
+	"name": "Siege Mode",
+
+	"tags": ["SCORPION", "Tech"],
+
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "70"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-0.4"
+	    }
+	]
+    },
+    "Scorpion Double Shot": {
+	"name": "Double Shot",
+
+	"tags": ["SCORPION", "Tech"],
+
+	"effects": [
+	    {
+		"property": "projectiles",
+		"operation": "set",
+		"value": "2"
+	    },
+	    {
+		"property": "interval",
+		"operation": "mul",
+		"value": "0.12"
+	    }
+	]
+    }
+}

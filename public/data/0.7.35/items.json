@@ -1,0 +1,222 @@
+{
+    "Charged Ammo": {
+	"name": "Charged Ammo",
+	"price": "50",
+	"tags": [
+	    "Item",
+	    "Reinforcement"
+	]
+    },
+    "Deployment Module": {
+	"name": "Deployment Module",
+	"price": "0",
+	"tags": [
+	    "Item",
+	    "Reinforcement"
+	]
+    },
+    "Haste Module": {
+	"name": "Haste Module",
+	"price": "0",
+	"tags": [
+	    "Item",
+	    "Reinforcement",
+	    "Mech"
+	],
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".4"
+	    }
+	]
+    },
+    "Barrier": {
+	"name": "Barrier",
+	"price": "100",
+	"tags": [
+	    "Item",
+	    "Reinforcement"
+	]
+    },
+    "Laser Sights": {
+	"name": "Laser Sights",
+	"price": "50",
+	"tags": [
+	    "Item",
+	    "Reinforcement",
+	    "Ranged"
+	],
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "35"
+	    }
+	]
+    },
+    "Heavy Armor": {
+	"name": "Heavy Armor",
+	"price": "50",
+	"tags": [
+	    "Reinforcement",
+	    "Item",
+	    "Mech"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "1"
+	    }
+	]
+    },
+    "Improved Firepower Control System": {
+	"name": "Improved Firepower Control System",
+	"price": "100",
+	"tags": [
+	    "Reinforcement",
+	    "Item",
+	    "Mech"
+	],
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "1"
+	    }
+	]
+    },
+    "Enhancement Module": {
+	"name": "Enhancement Module",
+	"price": "50",
+	"tags": [
+	    "Reinforcement",
+	    "Item",
+	    "Mech"
+	],
+	"effects": [
+	    {
+		"property": "upgrade",
+		"operation": "set",
+		"value": "0"
+	    }
+	]
+    },
+    "Nano Repair Kit": {
+	"name": "Nano Repair Kit",
+	"price": "50",
+	"tags": [
+	    "Reinforcement",
+	    "Item",
+	    "Mech"
+	],
+	"effects": [
+	    {
+		"property": "regeneration",
+		"operation": "set",
+		"value": ".045"
+	    }
+	]
+    },
+
+    "Amplifying Core": {
+	"name": "Amplifying Core",
+	"price": "100",
+	"tags": [
+	    "Reinforcement",
+	    "Item",
+	    "Mech"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".75"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".75"
+	    }
+	]
+    },
+
+    "Super Heavy Armor": {
+	"name": "Super Heavy Armor",
+	"price": "300",
+	"tags": [
+	    "Reinforcement",
+	    "Item",
+	    "Mech"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "2"
+	    }
+	]
+    },
+    "Advanced Firepower Control System": {
+	"name": "Advanced Firepower Control System",
+	"price": "300",
+	"tags": [
+	    "Reinforcement",
+	    "Item",
+	    "Mech"
+	],
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "2"
+	    }
+	]
+    },
+    "Portable Shield": {
+	"name": "Portable Shield",
+	"price": "50",
+	"tags": [
+	    "Reinforcement",
+	    "Item",
+	    "Mech"
+	],
+	"effects": [
+	    {
+		"property": "shielded",
+		"operation": "set",
+		"value": "true"
+	    }
+	]
+    },
+    "Photon Coating": {
+	"name": "Photon Coating",
+	"price": "50",
+	"tags": [
+	    "Reinforcement",
+	    "Item"
+	]
+    },
+    "Anti-Interference Module": {
+	"name": "Anti-Interference Module",
+	"price"	: "0",
+	"tags": [
+	    "Reinforcement",
+	    "Item"
+	]
+    },
+    "Tank Production Line": {
+	"name": "Tank Production Line",
+	"price": "200",
+	"tags": [
+	    "Reinforcement",
+	    "Item"
+	]
+    }
+}
