@@ -1,0 +1,1021 @@
+{
+    "LevelTemplate": {
+	"name": "Level",
+	"effects": [
+	    {
+		"property": "level",
+		"operation": "set",
+		"value": "1"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "0"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0"
+	    }
+	]
+    },
+    "Tower Attack": {
+	"name": "Tower Attack",
+	"price": "100",
+	"tags": [
+	    "Mech",
+	    "Tower"
+	],
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "0.1"
+	    }
+	]
+    },
+    "Tower Defense": {
+	"name": "Tower Defense",
+	"price": "100",
+	"tags": [
+	    "Mech",
+	    "Tower"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "0.15"
+	    }
+	]
+    },
+    "Enhanced Range": {
+	"name": "Enhanced Range",
+	"price": "100",
+	"tags": [
+	    "Ranged",
+	    "Tower"
+	],
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "15"
+	    }
+	],
+	"hooks": [
+	    {
+		"name": "turnEnd",
+		"operation": "removeMod",
+		"value": "Enhanced Range"
+	    }
+	]
+    },
+    "High Mobility": {
+	"name": "High Mobility",
+	"price": "50",
+	"tags": [
+	    "Mech",
+	    "Tower"
+	],
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    }
+	],
+	"hooks": [
+	    {
+		"name": "turnEnd",
+		"operation": "removeMod",
+		"value": "High Mobility"
+	    }
+	]
+
+    },
+    "Subsidized Crawler": {
+	"name": "Subsidized Crawler",
+	"price": "0",
+	"tags": [
+	    "Reinforcement",
+	    "CRAWLER"
+	],
+	"effects": [
+	    {
+		"property": "upgrade",
+		"operation": "set",
+		"value": "0"
+	    }
+	]
+    },
+    "Assault Fang": {
+	"name": "Assault Fang",
+	"price": "0",
+	"tags": [
+	    "Reinforcement",
+	    "FANG"
+	],
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "0.4"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-15"
+	    }
+	]
+    },
+    "Extended Range Marksmen": {
+	"name": "Extended Range Marksmen",
+	"tags": [
+	    "Reinforcement",
+	    "MARKSMAN"
+	],
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "30"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-.2"
+	    }
+	]
+    },
+    "Subsidized Marksmen": {
+	"name": "Subsidized Marksmen",
+	"tags": [
+	    "Reinforcement",
+	    "MARKSMAN"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-50"
+	    }
+	]
+    },
+
+    "Subsidized Arclight": {
+	"name": "Subsidized Arclight",
+	"tags": [
+	    "Reinforcement",
+	    "ARCLIGHT"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-50"
+	    }
+	]
+    },
+    "Extended Range Arclight": {
+	"name": "Extended Range Arclight",
+	"tags": [
+	    "Reinforcement",
+	    "ARCLIGHT"
+	],
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "20"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-.2"
+	    }
+	]
+    },
+    "Heavy Arclight": {
+	"name": "Heavy Arclight",
+	"price": "100",
+	"tags": [
+	    "Reinforcement",
+	    "ARCLIGHT"
+	],
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-15"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "1.8"
+	    }
+	]
+    },
+
+    "Mass Produced Wasp": {
+	"name": "Mass Produced Wasp",
+	"tags": [
+	    "Reinforcement",
+	    "WASP"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-100"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-.35"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "-.35"
+	    }
+	]
+    },
+    "Improved Wasp": {
+	"name": "Improved Wasp",
+	"tags": [
+	    "Reinforcement",
+	    "WASP"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "100"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".60"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".60"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "20"
+	    }
+	]
+    },
+
+    "Subsidized Mustang": {
+	"name": "Subsidized Mustang",
+	"price": "0",
+	"tags": [
+	    "Reinforcement",
+	    "MUSTANG"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-50"
+	    }
+	]
+    },
+    "Heavy Mustang": {
+	"name": "Heavy Mustang",
+	"tags": [
+	    "Reinforcement",
+	    "MUSTANG"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "2"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-20"
+	    }
+	]
+    },
+
+    "Mass Produced Sledgehammer": {
+	"name": "Mass Produced Sledgehammer",
+	"price": "0",
+	"tags": [
+	    "Reinforcement",
+	    "SLEDGEHAMMER"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-100"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-.3"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "-.3"
+	    }
+	]
+    },
+    "Extended Range Sledgehammer": {
+	"name": "Extended Range Sledgehammer",
+	"tags": [
+	    "Reinforcement",
+	    "SLEDGEHAMMER"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "-.3"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "30"
+	    }
+	]
+    },
+    "Improved Sledgehammer": {
+	"name": "Improved Sledgehammer",
+	"tags": [
+	    "Reinforcement",
+	    "SLEDGEHAMMER"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "100"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".6"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".6"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    }
+	]
+    },
+
+    "Improved Steel Ball": {
+	"name": "Improved Steel Ball",
+	"tags": [
+	    "Reinforcement",
+	    "STEEL BALL"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "50"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".5"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".3"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "10"
+	    }
+	]
+    },
+    "Subsidized Steel Ball": {
+	"name": "Subsidized Steel Ball",
+	"tags": [
+	    "Reinforcement",
+	    "STEEL BALL"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-50"
+	    }
+	]
+    },
+
+    "Subsidized Stormcaller": {
+	"name": "Subsidized Stormcaller",
+	"tags": [
+	    "Reinforcement",
+	    "STORMCALLER"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-50"
+	    }
+	]
+    },
+    "Improved Stormcaller": {
+	"name": "Improved Stormcaller",
+	"tags": [
+	    "Reinforcement",
+	    "STORMCALLER"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "100"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".5"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "4"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-20"
+	    }
+	]
+    },
+    "Extended Range Stormcaller": {
+	"name": "Extended Range Stormcaller",
+	"tags": [
+	    "Reinforcement",
+	    "STORMCALLER"
+	],
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "35"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-.3"
+	    }
+	]
+    },
+
+    "Mass Produced Phoenix": {
+	"name": "Mass Produced Phoenix",
+	"tags": [
+	    "Reinforcement",
+	    "PHOENIX"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-100"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-.4"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "-.4"
+	    }
+	]
+    },
+    "Extended Range Phoenix": {
+	"name": "Extended Range Phoenix",
+	"tags": [
+	    "Reinforcement",
+	    "PHOENIX"
+	],
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "20"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-.2"
+	    }
+	]
+    },
+    "Improved Phoenix": {
+	"name": "Improved Phoenix",
+	"price": "0",
+	"tags": [
+	    "Reinforcement",
+	    "PHOENIX"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "100"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "2.5"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".5"
+	    }
+	]
+    },
+
+    "Mass Produced Rhino": {
+	"name": "Mass Produced Rhino",
+	"price": "0",
+	"tags": [
+	    "Reinforcement",
+	    "RHINO"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-100"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-.3"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "-.3"
+	    }
+	]
+    },
+
+    "Heavy Hacker": {
+	"name": "Heavy Hacker",
+	"price": "0",
+	"tags": [
+	    "Reinforcement",
+	    "HACKER"
+	],
+	"effects": [
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "5"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "5"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-35"
+	    }
+	]
+    },
+
+    "Extended Range Vulcan": {
+	"name": "Extended Range Vulcan",
+	"tags": [
+	    "Reinforcement",
+	    "VULCAN"
+	],
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "20"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".5"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".35"
+	    }
+	]
+    },
+    "Assault Vulcan": {
+	"name": "Assault Vulcan",
+	"price": "50",
+	"tags": [
+	    "Reinforcement",
+	    "VULCAN"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".4"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-10"
+	    }
+	]
+    },
+
+    "Mass Produced Fortress": {
+	"name": "Mass Produced Fortress",
+	"tags": [
+	    "Reinforcement",
+	    "FORTRESS"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-100"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-.3"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "-.3"
+	    }
+	]
+    },
+    "Improved Fortress": {
+	"name": "Improved Fortress",
+	"price": "0",
+	"tags": [
+	    "Reinforcement",
+	    "FORTRESS"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".5"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".3"
+	    },
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "100"
+	    }
+	]
+    },
+    "Assault Fortress": {
+	"name": "Assault Fortress",
+	"tags": [
+	    "Reinforcement",
+	    "FORTRESS"
+	],
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".3"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".3"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-10"
+	    }
+	]
+    },
+    "Extended Range Fortress": {
+	"name": "Extended Range Fortress",
+	"tags": [
+	    "Reinforcement",
+	    "FORTRESS"
+	],
+	"effects": [
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "20"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".3"
+	    }
+	]
+    },
+
+    "Mass Produced Melting Point": {
+	"name": "Mass Produced Melting Point",
+	"price": "0",
+	"tags": [
+	    "Reinforcement",
+	    "MELTING POINT"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-100"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-10"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-.2"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "-.2"
+	    }
+	]
+    },
+    "Assault Melting Point": {
+	"name": "Assault Melting Point",
+	"tags": [
+	    "Reinforcement",
+	    "MELTING POINT"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".7"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "15"
+	    }
+	]
+    },
+    "Improved Melting Point": {
+	"name": "Improved Melting Point",
+	"tags": [
+	    "Reinforcement",
+	    "MELTING POINT"
+	],
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".5"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".2"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "20"
+	    },
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "100"
+	    }
+	]
+    },
+
+    "Mass Produced Overlord": {
+	"name": "Mass Produced Overlord",
+	"price": "0",
+	"tags": [
+	    "Reinforcement",
+	    "OVERLORD"
+	],
+	"effects": [
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "-100"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-10"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-.2"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "-.2"
+	    }
+	]
+    },
+    "Heavy Overlord": {
+	"name": "Heavy Overlord",
+	"tags": [
+	    "Reinforcement",
+	    "OVERLORD"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".75"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": "-.35"
+	    }
+	]
+    },
+    "Improved Overlord": {
+	"name": "Improved Overlord",
+	"tags": [
+	    "Reinforcement",
+	    "OVERLORD"
+	],
+	"effects": [
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".30"
+	    },
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".30"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "20"
+	    },
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "100"
+	    }
+	]
+    },
+
+    "Assault Scorpion" : {
+	"name": "Assault Scorpion",
+	"tags": [
+	    "Reinformceent",
+	    "SCORPION"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".5"
+	    },
+	    {
+		"property": "speed",
+		"operation": "add",
+		"value": "3"
+	    },
+	    {
+		"property": "interval",
+		"operation": "add",
+		"value": "-1.5"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "-30"
+	    }
+	]
+    },
+
+    "Extended Range War Factory" : {
+	"name": "Extended Range War Factory",
+	"tags": [
+	    "Reinformceent",
+	    "WAR FACTORY"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": "-.35"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "20"
+	    }
+	]
+    },
+
+    "Improved Wraith" : {
+	"name": "Improved Wraith",
+	"tags": [
+	    "Reinformceent",
+	    "WRAITH"
+	],
+	"effects": [
+	    {
+		"property": "hp",
+		"operation": "mul",
+		"value": ".3"
+	    },
+	    {
+		"property": "atk",
+		"operation": "mul",
+		"value": ".3"
+	    },
+	    {
+		"property": "range",
+		"operation": "add",
+		"value": "5"
+	    },
+	    {
+		"property": "cost",
+		"operation": "add",
+		"value": "100"
+	    }
+	]
+    }
+}
