@@ -1090,7 +1090,7 @@
 	    {
 		"property": "hp",
 		"operation": "mul",
-		"value": "-.40"
+		"value": ".40"
 	    },
 	    {
 		"property": "atk",
