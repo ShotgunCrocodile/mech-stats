@@ -63,7 +63,8 @@
 	 .values(mods)
 	 .filter((mod: any) => activeModifiers.value.includes(mod.name));
      modifiers.push(levelModTemplate);
-     mechData.value = modifyMech(baseMechData, modifiers);
+     const level = parseInt(levelModTemplate.effects[0].value)
+     mechData.value = modifyMech(baseMechData, modifiers, level);
  }
 </script>
 

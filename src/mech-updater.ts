@@ -60,7 +60,7 @@ export function describeMod(mod: ModData): string {
 /*
  * Take mech data and apply a list of modifications to it.
  */
-export function modifyMech(baseStats: MechData, mods: ModData[]): MechData {
+export function modifyMech(baseStats: MechData, mods: ModData[], level: number): MechData {
     let base: MechData;
     let mech: MechData = cloneMech(baseStats);
 
@@ -68,7 +68,7 @@ export function modifyMech(baseStats: MechData, mods: ModData[]): MechData {
     for (const stage of stages) {
         base = cloneMech(mech);
         for (const modEffect of stage) {
-            applyMod(base, mech, modEffect);
+            applyMod(base, mech, modEffect, level);
         }
 
     }
@@ -94,12 +94,12 @@ function stagesFromMods(mods: ModData[]): ModEffect[][] {
 }
 
 
-function applyMod(baseMech: MechData, mech: MechData, effect: ModEffect): void {
+function applyMod(baseMech: MechData, mech: MechData, effect: ModEffect, level: number): void {
     if (effect.operation !== "set" && !mech.hasOwnProperty(effect.property)) {
         throw Error('Mech does not have property ' + effect.property);
     }
     console.log(`applying ${effect.operation} ${effect.property} ${effect.value}`);
-    operations[effect.operation](baseMech, mech, effect.property, effect.value);
+    operations[effect.operation](baseMech, mech, effect.property, effect.value, level);
 }
 
 
@@ -108,29 +108,30 @@ function cloneMech(mech: MechData): MechData {
     return newMech;
 }
 
-function parseValue(baseMech: MechData, property: string, value: string): number | string | boolean {
+function parseValue(baseMech: MechData, property: string, value: string, level: number): number | string | boolean {
     if (property === "targets") {
         return value;
     }
     if (value === "true") return true;
     if (value === "false") return false;
     /// Replace L with the value of the mech's level and multiply.
-    return value.split("L")
-        .map((p) => p !== "" ? parseFloat(p) : baseMech.level)
+    var result = value.split("L")
+        .map((p) => p !== "" ? parseFloat(p) : level)
         .reduce((a, c) => a * c, 1);
+    return result;
 }
 
 const operations = {
-    "mul": (baseMech: MechData, mech: MechData, property: string, value: string) => {
-        const parsedValue = parseValue(baseMech, property, value);
+    "mul": (baseMech: MechData, mech: MechData, property: string, value: string, level: number) => {
+        const parsedValue = parseValue(baseMech, property, value, level);
         const oldValue = mech[property];
         const baseValue = baseMech[property];
         mech[property] = oldValue + baseValue * parsedValue;
     },
-    "add": (baseMech: MechData, mech: MechData, property: string, value: string) => {
-        mech[property] += parseValue(baseMech, property, value);
+    "add": (baseMech: MechData, mech: MechData, property: string, value: string, level: number) => {
+        mech[property] += parseValue(baseMech, property, value, level);
     },
-    "set": (baseMech: MechData, mech: MechData, property: string, value: string) => {
-        mech[property] = parseValue(baseMech, property, value);
+    "set": (baseMech: MechData, mech: MechData, property: string, value: string, level: number) => {
+        mech[property] = parseValue(baseMech, property, value, level);
     },
 };

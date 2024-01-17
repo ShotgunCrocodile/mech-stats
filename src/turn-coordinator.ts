@@ -872,7 +872,7 @@ export class TurnCoordinator {
                 let mech = deepCopy(unit.baseModel);
                 let mod = this.techs.techs[unit.baseModel.name]["Efficient Maintenance"];
                 if (mod && mod.boughtOn < turn) {
-                    mech = modifyMech(mech, [this.dataDir.modForName(mod.name)!]);
+                    mech = modifyMech(mech, [this.dataDir.modForName(mod.name)!], 1);
                 }
                 return {
                     "name": `${mech.name} Upkeep`,
@@ -936,7 +936,7 @@ export class TurnCoordinator {
         let activeMods = mods
             .modsAffectingTurn(turn)
             .filter((mod) => modAppliesToMech(mod, mech));
-        mech = modifyMech(mech, activeMods);
+        mech = modifyMech(mech, activeMods, 1);
         return [{
             "name": `Unlock ${mech.name}`,
             "price": mech.unlock.toString(),
@@ -955,7 +955,7 @@ export class TurnCoordinator {
             .map((ident) => army.units[ident])
             .map((unit: Unit) => {
                 const relevantMods = activeMods.filter((mod) => modAppliesToMech(mod, unit.baseModel));
-                const mech = modifyMech(unit.baseModel, relevantMods);
+                const mech = modifyMech(unit.baseModel, relevantMods, 1);
                 return {
                     "name": `Buy ${mech.name} (lvl ${unit.level})`,
                     "price": unit.value.toString(),
@@ -986,7 +986,7 @@ export class TurnCoordinator {
             .modsAffectingTurn(turnNumber)
             .filter((mod) => modAppliesToMech(mod, mech))
             .concat(unit.levelMod);
-        mech = modifyMech(mech, activeMods);
+        mech = modifyMech(mech, activeMods, 1);
 
         return [{
             "name": `Recover ${mech.name} ${unit.ident}`,
