@@ -1,0 +1,172 @@
+{
+    "CRAWLER" :{
+	"Crawler Mech Rage": 200,
+	"Replicate": 200,
+	"Subterranean Blitz": 250,
+	"Acidic Explosion": 200,
+	"Impact Drill": 200
+    },
+    "FANG": {
+	"Ignite": 300,
+	"Ranged Enhancement": 300,
+	"Fang Mech Rage": 300,
+	"Portable Shield": 450,
+	"Armor-Piercing Bullets": 250
+    },
+    "MARKSMAN": {
+	"Doubleshot": 300,
+	"Range Enhancement": 300,
+	"Quick Reload": 300,
+	"Electromagnetic Shot": 300,
+	"Elite Marksman": 400,
+	"Shooting Squad": 300,
+	"Assault Mode": 150,
+	"Aerial Specialization": 250
+    },
+    "ARCLIGHT": {
+	"Range Enhancement": 300,
+	"Electromagnetic Shot": 200,
+	"Charged Shot": 300,
+	"Base Armor": 150,
+	"Anti-Aircraft Ammunition": 300,
+	"Elite Marksman": 300
+    },
+    "WASP": {
+	"Energy Shield": 300,
+	"Range Enhancement": 300,
+	"Jump Drive": 50,
+	"Ground Specialization": 200,
+	"Elite Marksman": 300,
+	"Ignite": 200,
+	"Electromagnetic Shot": 200,
+	"High-Explosive Ammo": 150,
+	"Armor-Piercing Bullets": 200,
+	"Aerial Specialization": 200
+    },
+    "MUSTANG": {
+	"Missile Interceptor": 200,
+	"Range Enhancement": 300,
+	"High-Explosive Ammo": 200,
+	"Aerial Specialization": 300,
+	"Armor-Piercing Bullets": 300
+    },
+    "SLEDGEHAMMER": {
+	"Field Maintenance": 300,
+	"Damage Sharing": 300,
+	"Sledgehammer Mech Rage": 300,
+	"Range Enhancement": 300,
+	"Electromagnetic Shot": 300,
+	"Armor-Piercing Bullets": 350,
+	"Base Armor": 300
+    },
+    "STEEL BALL": {
+	"Energy Absorption": 300,
+	"Damage Sharing": 250,
+	"Range Enhancement": 300,
+	"Mechanical Division": 350,
+	"Base Armor": 350,
+	"Heavy Target": 200
+    },
+    "STORMCALLER": {
+	"Incendiary Bomb": 300,
+	"Range Enhancement": 300,
+	"Launcher Overload": 300,
+	"High-Explosive Ammo": 200,
+	"Electromagnetic Explosion": 300,
+	"High Explosive Anti-tank Shells": 200
+    },
+    "PHOENIX": {
+	"Quantum Reassembly": 300,
+	"Range Enhancement": 300,
+	"Launcher Overload": 250,
+	"Energy Shield": 200,
+	"Jump Drive": 50,
+	"Electromagnetic Shot": 200,
+	"Elite Marksman": 400,
+	"Charged Shot": 200
+    },
+    "RHINO": {
+	"Whirlwind": 250,
+	"Photon Coating": 300,
+	"Rhino Field Maintenance": 300,
+	"Final Blitz": 250,
+	"Rhino Mech Rage": 200,
+	"Wreckage Recycling": 100,
+	"Power Armor": 300,
+	"Base Armor": 200
+    },
+    "HACKER": {
+	"Multiple Control": 250,
+	"Barrier": 300,
+	"Range Enhancement": 300,
+	"Enhanced Control": 300,
+	"Electromagnetic Interference": 100
+    },
+    "VULCAN": {
+	"Ignite": 200,
+	"Range Enhancement": 300,
+	"Incendiary Bomb": 300,
+	"Scorching Flames": 250,
+	"Best Partner": 200,
+	"Sticky Oil Bomb": 250,
+	"Giant Armor": 200
+    },
+    "FORTRESS": {
+	"Barrier": 300,
+	"Range Enhancement": 300,
+	"Anti-Air Barrage": 200,
+	"Fang Production": 300,
+	"Launcher Overload": 200,
+	"Elite Marksman": 200,
+	"Doubleshot": 200,
+	"Giant Armor": 200,
+	"Rocket Punch": 300
+    },
+    "MELTING POINT": {
+	"Energy Absorption": 300,
+	"Range Enhancement": 300,
+	"Energy Diffraction": 250,
+	"Electromagnetic Barrage": 300,
+	"Crawler Production": 300,
+	"Giant Armor": 200
+    },
+    "OVERLORD": {
+	"Overlord Artillery": 350,
+	"Launcher Overload": 250,
+	"Mothership": 300,
+	"Jump Drive": 300,
+	"Photon Emission": 350,
+	"Range Enhancement": 300,
+	"Giant Armor": 200,
+	"Field Maintenance": 150,
+	"High-Explosive Ammo": 100
+    },
+    "WAR FACTORY": {
+	"Range Enhancement": 300,
+	"Efficient Maintenance": 50,
+	"PHOENIX Production": 350,
+	"STEEL BALL Production": 300,
+	"SLEDGEHAMMER Production": 250,
+	"Missile Interceptor": 250,
+	"Launcher Overload": 200,
+	"Photon Coating": 300,
+	"High-Explosive Ammo": 150,
+	"Giant Armor": 200
+    },
+    "WRAITH": {
+	"Range Enhancement": 300,
+	"Degenerate Beam": 200,
+	"Field Maintenance": 200,
+	"Giant Armor": 200,
+	"High-Explosive Ammo": 150,
+	"Floating Artillery Array": 400
+    },
+    "SCORPION": {
+	"Acid Attack": 300,
+	"Siege Mode": 300,
+	"Range Enhancement": 300,
+	"Scorpion Double Shot": 300,
+	"Field Maintenance": 200,
+	"Giant Armor": 200
+    }
+}
