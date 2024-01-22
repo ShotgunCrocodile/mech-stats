@@ -1,5 +1,5 @@
 import type { MechData, ModData } from './data-types';
-import { deepCopy } from './utils';
+import { deepCopy, isDefined } from './utils';
 
 export class DataDir {
     mechData: Map<string, MechData>;
@@ -57,6 +57,12 @@ export class DataDir {
             }
         }
         return undefined;
+    }
+
+    modsForNames(names: string[]): ModData[] {
+        return names
+            .map((name) => this.modForName(name))
+            .filter(isDefined);
     }
 
     mechForName(name: string): MechData | undefined {

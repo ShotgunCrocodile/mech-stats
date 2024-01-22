@@ -55,6 +55,11 @@ const router = createRouter({
             name: 'replay-shortener',
             component: () => import('../views/FixReplay.vue'),
         },
+        {
+            path: '/breakpoint-explorer',
+            name: 'breakpoint-explorer',
+            component: () => import('../views/BreakPointExplorer.vue'),
+        },
     ]
 })
 
