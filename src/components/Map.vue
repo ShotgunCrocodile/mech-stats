@@ -229,8 +229,8 @@
 
 
  const loadObjects = () => {
-     const data = props.objects;
-     if (!data) return [
+     const objs = props.objects.objects || [];
+     const data = objs.concat([
 	 {
 	     movable: false,
 	     x: -140,
@@ -263,9 +263,8 @@
 	     height: 2,
 	     render: drawTower,
 	 },
-     ];
+     ]);
      return data
-	 .objects
 	 .map((obj) => {
 	     obj.render = vectorGraphics[obj.name] || drawTower;
 	     return obj;
