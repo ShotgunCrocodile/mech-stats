@@ -12,6 +12,7 @@ export const VERSIONS = [
     "0.7.36",
     "0.7.38",
     "0.7.40",
+    "0.7.42",
 ];
 export const CURRENT_VERSION = VERSIONS[VERSIONS.length - 1];
 

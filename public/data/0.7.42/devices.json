@@ -1,0 +1,11 @@
+{
+    "Sentry Missile": {
+	"price": "50"
+    },
+     "Shield Generator": {
+	"price": "100"
+    },
+     "Missile Interceptor": {
+	"price": "100"
+    }
+}
